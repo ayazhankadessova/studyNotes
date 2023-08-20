@@ -7,7 +7,7 @@ const path = require('path')
 
 // use tabs so it is easier to import logs in the Excel or smth similar
 const logEvents = async (message, logFileName) => {
-  const dateTime = format(new Date(2014, 1, 11), 'yyyyMMdd\tHH:mm:ss')
+  const dateTime = format(new Date(), 'yyyyMMdd\tHH:mm:ss')
   const logItem = `${dateTime}\t${uuid()}\t${message}\n`
 
   try {
