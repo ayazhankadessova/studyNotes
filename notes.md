@@ -27,3 +27,15 @@ app.all('*', (req, res) => {
   }
 })
 ```
+
+## Middleware
+
+- One or more functions that are placed in the path of requests that are received by our backend API.
+- Middleware adds: 1) Additional Functionality for the API 2) Preliminary Request Processing before they get into the controller where the request processing will be completed.
+- We will be adding 3 Types of Middleware:
+
+1. Built-in
+2. Custom
+3. Third-party
+
+- HTTP Request -> Middleware Functions -> API Response
