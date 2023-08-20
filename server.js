@@ -1,17 +1,40 @@
 const express = require('express')
 const app = express()
-
 const path = require('path')
-
 const { loggerMiddleware } = require('./middleware/logger')
+const errorHandlerMiddleware = require('./middleware/error-handler')
+const cookieParser = require('cookie-parser')
+
+// security packages
+const helmet = require('helmet')
+const cors = require('cors')
+const corsOptions = require('./config/corsOptions')
+const xss = require('xss-clean')
+const rateLimiter = require('express-rate-limit')
 
 const PORT = process.env.PORT || 3500
 
 //logger comed before everything else
 app.use(loggerMiddleware)
 
+// // security packages
+// app.set('trust proxy', 1)
+// app.use(
+//   rateLimiter({
+//     windowMs: 15 * 60 * 1000, // 15 minutes
+//     max: 100, // limit each IP to 100 requests per windowMs
+//   })
+// )
+
 // let app process json: receive & parse json data
 app.use(express.json())
+app.use(helmet())
+// make it available to the public
+// app.use(cors())
+app.use(cors(corsOptions))
+app.use(xss())
+
+app.use(cookieParser())
 
 const router = require('./routes/root')
 
@@ -34,6 +57,8 @@ app.all('*', (req, res) => {
     res.type('txt').send('404 Not Found')
   }
 })
+
+app.use(errorHandlerMiddleware)
 
 const start = async () => {
   try {

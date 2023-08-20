@@ -54,3 +54,24 @@ app.use(express.json())
 3. Third-party
 
 - HTTP Request -> Middleware Functions -> API Response
+
+# 2. Create middleware
+
+1. Create `middleware`, `logs` folder
+2. Add `logger` middleware and `error-handler` middleware
+3. Add cookie parser
+
+```
+const cookieParser = require('cookie-parser')
+```
+
+4. Make api available to the public: `cors`
+5. Add security:
+
+> config folder -> allowedOrigins.js -> add local hosts that we would accept to access our REST API
+> config folder -> corsOptions.js
+
+6. test with fetch('localhost:3500')
+7. check out `errLog.log` -> has been blocked by CORS policy
+
+[] Check if can log custom errors
