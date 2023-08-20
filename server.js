@@ -3,16 +3,20 @@ const app = express()
 
 const path = require('path')
 
+const { loggerMiddleware } = require('./middleware/logger')
+
 const PORT = process.env.PORT || 3500
+
+//logger comed before everything else
+app.use(loggerMiddleware)
+
+// let app process json: receive & parse json data
+app.use(express.json())
 
 const router = require('./routes/root')
 
-// app.get('/', (req, res) => {
-//   res.send('<h1>Study Notes</h1><a href="/api-docs">Documentation</a>')
-// })
-
 // use public folder
-app.use('/', express.static(path.join(__dirname, '/public')))
+app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', router)
 
