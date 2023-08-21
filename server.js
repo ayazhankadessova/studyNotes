@@ -1,5 +1,13 @@
+require('dotenv').config()
+
 const express = require('express')
 const app = express()
+
+// connect db
+const connectDB = require('./config/dbConn')
+const mongoose = require('mongoose')
+const { logEvents } = require('./middleware/logger')
+
 const path = require('path')
 const { loggerMiddleware } = require('./middleware/logger')
 const errorHandlerMiddleware = require('./middleware/error-handler')
@@ -62,12 +70,31 @@ app.use(errorHandlerMiddleware)
 
 const start = async () => {
   try {
+    await connectDB()
     app.listen(PORT, () =>
       console.log(`Server is listening on port ${PORT}...`)
     )
   } catch (error) {
     console.log(error)
+    logEvents(
+      `${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
+      'mongoErrLog.log'
+    )
   }
 }
 
 start()
+
+// connectDB()
+// mongoose.connection.once('open', () => {
+//   console.log('Connected to MongoDB')
+//   app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+// })
+
+// mongoose.connection.on('error', (err) => {
+//   console.log(err)
+//   logEvents(
+//     `${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
+//     'mongoErrLog.log'
+//   )
+// })
