@@ -74,4 +74,24 @@ const cookieParser = require('cookie-parser')
 6. test with fetch('localhost:3500')
 7. check out `errLog.log` -> has been blocked by CORS policy
 
+# 3. MongoDB
+
+1. Install `dotenv`
+2. Create a project + cluster in MongoDB
+3. add `MONGO_URI` to `.env`
+4. Create userModel based on UserStories
+5. Create NodeModel
+6. Add `mongoose-sequence`
+7. Add MongoDB connection
+
+```
+noteSchema.plugin(AutoIncrement, {
+  // name our incr field, will be added to schema
+  inc_filed: 'ticket',
+  // sep collection called counter will be created
+  id: 'ticketNums',
+  start_seq: 500,
+})
+```
+
 [] Check if can log custom errors
