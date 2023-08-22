@@ -34,9 +34,9 @@ const noteSchema = new mongoose.Schema(
 
 noteSchema.plugin(AutoIncrement, {
   // name our incr field, will be added to schema
-  inc_filed: 'ticket',
-  // sep collection called counter will be created
+  inc_field: 'ticket',
   id: 'ticketNums',
+  // sep collection called counter will be created
   start_seq: 500,
 })
 
