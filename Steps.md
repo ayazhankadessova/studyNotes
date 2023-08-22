@@ -94,4 +94,14 @@ noteSchema.plugin(AutoIncrement, {
 })
 ```
 
+## 4. Controllers
+
+1. Add `userRoutes` route
+2. Add `Controllers` folder
+3. Bootstrap `usersController.js` with needed controllers
+
+- Highlight `(` -> CMD + D + CMD+V
+
+4. Add controllers to routes
+
 [] Check if can log custom errors
