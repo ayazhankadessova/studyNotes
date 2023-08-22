@@ -22,17 +22,11 @@ const rateLimiter = require('express-rate-limit')
 
 const PORT = process.env.PORT || 3500
 
+const router = require('./routes/root')
+const userRouter = require('./routes/userRoutes')
+
 //logger comed before everything else
 app.use(loggerMiddleware)
-
-// // security packages
-// app.set('trust proxy', 1)
-// app.use(
-//   rateLimiter({
-//     windowMs: 15 * 60 * 1000, // 15 minutes
-//     max: 100, // limit each IP to 100 requests per windowMs
-//   })
-// )
 
 // let app process json: receive & parse json data
 app.use(express.json())
@@ -44,12 +38,11 @@ app.use(xss())
 
 app.use(cookieParser())
 
-const router = require('./routes/root')
-
 // use public folder
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', router)
+app.use('/users', userRouter)
 
 // for errors, catch-all that goes at the very end
 // for requests that were not routed properly
