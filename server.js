@@ -32,8 +32,8 @@ app.use(loggerMiddleware)
 app.use(express.json())
 app.use(helmet())
 // make it available to the public
-// app.use(cors())
-app.use(cors(corsOptions))
+app.use(cors())
+// app.use(cors(corsOptions))
 app.use(xss())
 
 app.use(cookieParser())
