@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 require('dotenv').config()
+const bcrypt = require('bcrypt')
 
 // need username & pwd
 
@@ -27,6 +28,12 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+})
+
+// what do we want to accomplish before we save
+UserSchema.pre('save', async function () {
+  const salt = await bcrypt.genSalt(10)
+  this.password = await bcrypt.hash(this.password, salt)
 })
 
 module.exports = mongoose.model('User', UserSchema)
