@@ -105,10 +105,24 @@ noteSchema.plugin(AutoIncrement, {
 4. Add controllers to routes
 
 - [x] Get All Users
-- [x] Create new user w/ pwd hashing
+- [x] Create new user w/ pwd hashing -> content-type: application/json
 - [x] Update User
+- [ ] Delete User -> cannot delete if user has assigned notes
 
-5. Clean-ups/standartization
+5. Testing controllers
+
+- Get All User:
+
+  1. [x] No users - error
+  2. [x] Pwd - not shown
+
+- Create User:
+
+  1. [x] Catches Duplicate username
+  2. [x] Errors when not all fields input
+  3. [x] Test AsyncHandler w/ unexpected Token
+
+6. Clean-ups/standartization
 
 - [ ] Check if can log custom errors
 
@@ -117,3 +131,9 @@ noteSchema.plugin(AutoIncrement, {
 ## Fixes
 
 1. Transfer pre-save hash password to User Schema
+
+## Learned
+
+1. Optional chaining
+
+> if (!users?.length)
