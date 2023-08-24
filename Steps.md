@@ -104,4 +104,16 @@ noteSchema.plugin(AutoIncrement, {
 
 4. Add controllers to routes
 
-[] Check if can log custom errors
+- [x] Get All Users
+- [x] Create new user w/ pwd hashing
+- [x] Update User
+
+5. Clean-ups/standartization
+
+- [ ] Check if can log custom errors
+
+---
+
+## Fixes
+
+1. Transfer pre-save hash password to User Schema
