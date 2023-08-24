@@ -13,8 +13,11 @@ const { response } = require('express')
 const getAllUsers = asyncHandler(async (req, res) => {
   // dont return password
   const users = await User.find().select('-passwords').lean()
-  if (!users) {
-    return res.status(400).json({ message: 'User not found' })
+
+  //   if (!user?.length) -> optional chaining
+
+  if (!Array.isArray(users) || users.length === 0) {
+    return res.status(400).json({ message: 'Users not found' })
   }
   res.json(users)
 })
@@ -114,6 +117,32 @@ const updateUser = asyncHandler(async (req, res) => {
 // @desc Delete a User
 // @route DELETE /users
 // @access Private
-const deleteUser = asyncHandler(async (req, res) => {})
+const deleteUser = asyncHandler(async (req, res) => {
+  const { id } = req.body
+
+  if (!id) {
+    throw new BadRequestError('User ID required.')
+  }
+
+  const notes = await Note.findOne({ user: id }).lean().exec()
+
+  // cannot delete if user has assigned notes
+  if (notes?.length) {
+    throw new BadRequestError('User has assigned notes.')
+  }
+
+  const user = await User.findById(id).exec()
+
+  if (!user) {
+    throw new BadRequestError('User not found')
+  }
+
+  // will hold deleted user's info
+  const result = await User.deleteOne()
+
+  const reply = `Username ${result.username} with ID ${result._id} deleted`
+
+  res.json(reply)
+})
 
 module.exports = { getAllUsers, createNewUser, updateUser, deleteUser }
