@@ -145,6 +145,15 @@ noteSchema.plugin(AutoIncrement, {
 - [ ] Create Note model
 - [ ] Create Controllers
 
+## Frontend
+
+1. Bootstrap
+
+- [ ] Redux
+- [ ] Redux File Structure
+
+2. Router
+
 ---
 
 ## Fixes
