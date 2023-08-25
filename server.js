@@ -5,6 +5,7 @@ const app = express()
 
 // connect db
 const connectDB = require('./config/dbConn')
+const authenticateUser = require('./middleware/authentication')
 const mongoose = require('mongoose')
 const { logEvents } = require('./middleware/logger')
 
@@ -44,7 +45,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', router)
 app.use('/users', userRouter)
-app.use('/notes', notesRouter)
+app.use('/notes', authenticateUser, notesRouter)
 
 // for errors, catch-all that goes at the very end
 // for requests that were not routed properly
