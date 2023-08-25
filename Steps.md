@@ -122,6 +122,12 @@ noteSchema.plugin(AutoIncrement, {
   2. [x] Errors when not all fields input
   3. [x] Test AsyncHandler w/ unexpected Token
 
+- Update User
+
+  1. [x] User Not Found if id not correct
+  2. [x] All fields are required if one field is missing
+  3. [x] Update
+
 6. Clean-ups/standartization
 
 - [ ] Check if can log custom errors
