@@ -154,6 +154,12 @@ noteSchema.plugin(AutoIncrement, {
 
 2. Router
 
+- [ ] Allows to have nested routes
+
+```
+<Route path='/*' element={<App />} />
+```
+
 ---
 
 ## Fixes
