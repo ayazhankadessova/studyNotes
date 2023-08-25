@@ -124,10 +124,10 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new BadRequestError('User ID required.')
   }
 
-  const notes = await Note.findOne({ user: id }).lean().exec()
+  const note = await Note.findOne({ user: id }).lean().exec()
 
   // cannot delete if user has assigned notes
-  if (notes?.length) {
+  if (note) {
     throw new BadRequestError('User has assigned notes.')
   }
 
