@@ -142,6 +142,7 @@ noteSchema.plugin(AutoIncrement, {
 - [x] Create Notes Router
 - [ ] Create Middleware for authentication
 - [ ] Attach user to the notes route
+- [ ] Create Note model
 - [ ] Create Controllers
 
 ---
