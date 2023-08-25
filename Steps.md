@@ -128,6 +128,11 @@ noteSchema.plugin(AutoIncrement, {
   2. [x] All fields are required if one field is missing
   3. [x] Update
 
+- Delete User
+
+  1. [x] User not found if id incorrect
+  2. [ ] User has assigned notes -> check when notes exist
+
 6. Clean-ups/standartization
 
 - [ ] Check if can log custom errors
