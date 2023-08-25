@@ -24,6 +24,7 @@ const PORT = process.env.PORT || 3500
 
 const router = require('./routes/root')
 const userRouter = require('./routes/userRoutes')
+const notesRouter = require('./routes/noteRoutes')
 
 //logger comed before everything else
 app.use(loggerMiddleware)
@@ -43,6 +44,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', router)
 app.use('/users', userRouter)
+app.use('/notes', notesRouter)
 
 // for errors, catch-all that goes at the very end
 // for requests that were not routed properly

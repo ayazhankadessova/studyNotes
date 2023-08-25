@@ -137,6 +137,13 @@ noteSchema.plugin(AutoIncrement, {
 
 - [ ] Check if can log custom errors
 
+7. Jobs Router
+
+- [x] Create Notes Router
+- [ ] Create Middleware for authentication
+- [ ] Attach user to the notes route
+- [ ] Create Controllers
+
 ---
 
 ## Fixes
