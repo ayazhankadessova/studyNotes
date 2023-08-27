@@ -1,9 +1,9 @@
 # User Stories for Notes App
 
 1. [ ] Replace the existing sticky note system with a new one.
-2. [ ] Create a public-facing page that includes basic contact information.
+2. [x] Create a public-facing page that includes basic contact information.
 3. [ ] Implement an employee login feature for the notes app.
-4. [ ] Design a welcome page to be displayed after successful login.
+4. [x] Design a welcome page to be displayed after successful login.
 5. [ ] Ensure easy navigation throughout the app.
 6. [ ] Display the current user's information and assigned role.
 7. [ ] Include a logout option for users to exit the app.

@@ -160,6 +160,47 @@ noteSchema.plugin(AutoIncrement, {
 <Route path='/*' element={<App />} />
 ```
 
+- [ ] Create components for routing
+- [ ] Create Outlet
+
+```
+An <Outlet> should be used in parent route elements to render their child route elements. This allows nested UI to show up when child routes are rendered.
+```
+
+- [ ] Create multiple routes
+
+```
+function App() {
+  return (
+    <Routes>
+      <Route path='/' element={<Layout />}></Route>
+    </Routes>
+  )
+}
+```
+
+5. React JS
+
+1. Create public facing page -> `Public.js`
+
+- [x] Create Routes
+
+```
+function App() {
+  return (
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        {/* default component */}
+        <Route index element={<Public />} />
+        <Route path='login' element={<Login />} />
+      </Route>
+    </Routes>
+  )
+}
+```
+
+- [x] Create Login, Layout DashHeader, DashLayout components
+
 ---
 
 ## Fixes
