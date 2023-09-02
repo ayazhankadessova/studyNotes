@@ -150,10 +150,10 @@ noteSchema.plugin(AutoIncrement, {
 7. Note Router
 
 - [x] Create Notes Router
-- [ ] Create Middleware for authentication
-- [ ] Attach user to the notes route
-- [ ] Create Note model
-- [ ] Create Controllers
+- [x] Create Middleware for authentication
+- [x] Attach user to the notes route
+- [x] Create Note model
+- [x] Create Controllers
 
 ## Frontend
 
@@ -164,20 +164,22 @@ noteSchema.plugin(AutoIncrement, {
 
 2. Router
 
-- [ ] Allows to have nested routes
+- [x] Allows to have nested routes
 
 ```
 <Route path='/*' element={<App />} />
 ```
 
-- [ ] Create components for routing
-- [ ] Create Outlet
+- [x] Create components for routing (DashHeader, Outlet, DashFooter)
+- [x] Create Outlet
 
 ```
 An <Outlet> should be used in parent route elements to render their child route elements. This allows nested UI to show up when child routes are rendered.
 ```
 
-- [ ] Create multiple routes
+- [x] Create multiple routes
+
+_This is starter_
 
 ```
 function App() {
@@ -189,9 +191,7 @@ function App() {
 }
 ```
 
-5. React JS
-
-1. Create public facing page -> `Public.js`
+3. Create public facing page -> `Public.js`
 
 - [x] Create Routes
 
@@ -209,7 +209,14 @@ function App() {
 }
 ```
 
-- [x] Create Login, Layout DashHeader, DashLayout components
+4. Finish Hierarchy of the application
+
+- [x] Work on components for routing (DashHeader, Outlet, DashFooter)
+- [x] /dash -> welcome component
+- [x] /dash/notes -> noteslist
+- [x] /dash/users - usersList component
+- [x] Work on features (Auth, NotesList, UsersList)
+- [x] Basic Layout and structure for our application next, we will be managing state with Redux and applying the API layer with rtk query
 
 ---
 
@@ -222,4 +229,13 @@ function App() {
 
 1. Optional chaining
 
-> if (!users?.length)
+> if (!users?.length) 2. Route element
+
+- <Route> elements may be nested to indicate nested UI, which also correspond to nested URL paths. Parent routes render their child routes by rendering an <Outlet> .
+- Element helps associate path with UI.
+
+2. Nested Routes in React.js
+
+> https://www.geeksforgeeks.org/implement-nested-routes-in-react-js-react-router-dom-v6/
+
+3. Time Zones Database: https://www.iana.org/time-zones
