@@ -5,7 +5,7 @@ const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const noteSchema = new mongoose.Schema(
   {
-    createdBy: {
+    user: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
       required: [true, 'Please, provide a user.'],
