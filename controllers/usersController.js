@@ -48,7 +48,7 @@ const createNewUser = asyncHandler(async (req, res) => {
   }
 
   // Hash password
-  // TODO: trasfer to model
+  // TODO: transfer to model
   //   const hashedPwd = await bcrypt.hash(password, 10)
 
   //   const userObject = { username, password: hashedPwd, roles }
@@ -109,6 +109,7 @@ const updateUser = asyncHandler(async (req, res) => {
     user.password = password
   }
 
+  // can use save bc didnt use lean
   const updatedUser = await user.save()
 
   res.json({ message: `${updatedUser.username} updated` })
@@ -118,6 +119,7 @@ const updateUser = asyncHandler(async (req, res) => {
 // @route DELETE /users
 // @access Private
 const deleteUser = asyncHandler(async (req, res) => {
+  // destructure id from body
   const { id } = req.body
 
   if (!id) {
@@ -134,11 +136,11 @@ const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(id).exec()
 
   if (!user) {
-    throw new BadRequestError('User not found')
+    throw new BadRequestError('User not found.')
   }
 
   // will hold deleted user's info
-  const result = await User.deleteOne()
+  const result = await user.deleteOne()
 
   const reply = `Username ${result.username} with ID ${result._id} deleted`
 

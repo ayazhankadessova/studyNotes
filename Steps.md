@@ -131,7 +131,7 @@ noteSchema.plugin(AutoIncrement, {
 - Delete User
 
   1. [x] User not found if id incorrect
-  2. [ ] User has assigned notes -> check when notes exist
+  2. [x] User has assigned notes -> check when notes exist
 
 6. Clean-ups/standartization
 
@@ -206,6 +206,7 @@ function App() {
 ## Fixes
 
 1. Transfer pre-save hash password to User Schema
+2. [ ] Add `test.https`
 
 ## Learned
 
