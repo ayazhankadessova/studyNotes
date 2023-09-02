@@ -133,11 +133,21 @@ noteSchema.plugin(AutoIncrement, {
   1. [x] User not found if id incorrect
   2. [x] User has assigned notes -> check when notes exist
 
+### Done
+
+```
+1. In the `server.js` -> created route for the users
+2. In the routes directory, created `userRoutes.js`
+3. In the controllers directory, created the `usersControllers.js` that has all diff methods
+```
+
 6. Clean-ups/standartization
 
 - [ ] Check if can log custom errors
 
-7. Jobs Router
+## Do same for Note model
+
+7. Note Router
 
 - [x] Create Notes Router
 - [ ] Create Middleware for authentication
