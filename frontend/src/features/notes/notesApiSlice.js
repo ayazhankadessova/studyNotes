@@ -1,39 +1,40 @@
 import { createSelector, createEntityAdapter } from '@reduxjs/toolkit'
 import { apiSlice } from '../../app/api/apiSlice'
 
-// for normalized state
-const notesAdapter = createEntityAdapter({})
+const notesAdapter = createEntityAdapter({
+  sortComparer: (a, b) =>
+    a.completed === b.completed ? 0 : a.completed ? 1 : -1,
+})
 
 const initialState = notesAdapter.getInitialState()
 
 export const notesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getnotes: builder.query({
+    getNotes: builder.query({
       query: () => '/notes',
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError
       },
       keepUnusedDataFor: 5,
       transformResponse: (responseData) => {
-        const loadednotes = responseData.map((note) => {
+        const loadedNotes = responseData.map((note) => {
           note.id = note._id
           return note
         })
-        return notesAdapter.setAll(initialState, loadednotes)
+        return notesAdapter.setAll(initialState, loadedNotes)
       },
       providesTags: (result, error, arg) => {
         if (result?.ids) {
           return [
-            { type: 'note', id: 'LIST' },
-            ...result.ids.map((id) => ({ type: 'note', id })),
+            { type: 'Note', id: 'LIST' },
+            ...result.ids.map((id) => ({ type: 'Note', id })),
           ]
-        } else return [{ type: 'note', id: 'LIST' }]
+        } else return [{ type: 'Note', id: 'LIST' }]
       },
     }),
   }),
 })
 
-// query created
 export const { useGetNotesQuery } = notesApiSlice
 
 // returns the query result object
@@ -41,7 +42,6 @@ export const selectNotesResult = notesApiSlice.endpoints.getNotes.select()
 
 // creates memoized selector
 const selectNotesData = createSelector(
-  // pass result
   selectNotesResult,
   (notesResult) => notesResult.data // normalized state object with ids & entities
 )
