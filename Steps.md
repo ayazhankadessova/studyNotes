@@ -225,7 +225,7 @@ function App() {
 > npm i @reduxjs/toolkit react-redux
 
 2. Make `app` -> `api` -> `apiSlice`
-3. Make `store.js`
+3. Make `store.js`(Global Truth of States)
 4. Add `apiSlice` as reducer in `store.js`
 5. Provide `Store` to the application via adding `Provider` in `index.js`
 
@@ -244,7 +244,7 @@ root.render(
 )
 ```
 
-6. `UsersApi`
+6. `UsersApiSlice`
 7. normalize
 
 ```
@@ -252,6 +252,11 @@ root.render(
 // Validate status
 // Transform
 // return userAdapter
+// returns the query result object
+// creates memoized selector
+// pass result
+//getSelectors creates these selectors and we rename them with aliases using destructuring
+// Pass in a selector that returns the users slice of state
 ```
 
 8. `NotesApiSlice`
@@ -262,7 +267,7 @@ root.render(
     educers give new state. When the state in the Redux store changes, the connected React components receive the updated data as props. They can then use that data to update their own UI and rerender if necessary.
 13. 'user.js -> table row
 14. import user to userlist
-15. DO same for `NotesList`
+15. Do same for `NotesList`
 
 ---
 

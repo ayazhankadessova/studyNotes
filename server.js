@@ -45,7 +45,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', router)
 app.use('/users', userRouter)
-app.use('/notes', authenticateUser, notesRouter)
+app.use('/notes', notesRouter)
 
 // for errors, catch-all that goes at the very end
 // for requests that were not routed properly

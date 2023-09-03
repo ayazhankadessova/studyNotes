@@ -26,7 +26,6 @@ const getAllUsers = asyncHandler(async (req, res) => {
 // @route POST /users
 // @access Private
 const createNewUser = asyncHandler(async (req, res) => {
-  console.log('hi')
   const { username, password, roles } = req.body
 
   // confirm data

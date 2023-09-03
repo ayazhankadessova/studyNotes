@@ -10,7 +10,7 @@ const initialState = usersAdapter.getInitialState()
 // Validate status
 // Transform
 // return userAdapter
-// trq quiery will create hook
+// trq query will create hook
 // selectors
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
