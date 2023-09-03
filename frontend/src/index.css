@@ -10,9 +10,9 @@
 
 :root {
   /* COLORS */
-  --BGCOLOR: #0F172A;
-  --BORDER-COLOR: #FFF;
-  --COLOR: #FFF;
+  --BGCOLOR: #0f172a;
+  --BORDER-COLOR: #fff;
+  --COLOR: #fff;
   --ERROR: firebrick;
   --INACTIVE: lightgray;
   --LINK-COLOR: whitesmoke;
@@ -20,7 +20,7 @@
   --NOTE-BGCOLOR: hsla(240, 64%, 27%, 0.65);
   --STATUS-COMPLETE: limegreen;
   --STATUS-OPEN: firebrick;
-  --TABLE-BGCOLOR: #FFF;
+  --TABLE-BGCOLOR: #fff;
   --TABLE-COLOR: #000;
 }
 
@@ -125,7 +125,7 @@ a:focus-visible {
 }
 
 .welcome a::before {
-  content: "➜ "
+  content: '➜ ';
 }
 
 /* || DASH HEADER, CONTAINER & FOOTER */
@@ -176,4 +176,191 @@ a:focus-visible {
   font-size: 1rem;
   width: auto;
   height: auto;
+}
+
+/* || TABLES - GENERAL */
+
+thead,
+tbody,
+tr {
+  display: contents;
+}
+
+.table {
+  font-size: 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  color: var(--TABLE-COLOR);
+  gap: 0.1em;
+}
+
+.table__button {
+  padding: 0.25em;
+  font-size: 1.5rem;
+  color: var(--TABLE-COLOR);
+}
+
+.table__thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table__th,
+.table__cell {
+  background-color: var(--TABLE-BGCOLOR);
+  text-align: left;
+  border: 1px solid var(--TABLE-COLOR);
+  padding: 0.5em;
+}
+
+.table__cell:last-child {
+  display: grid;
+  place-content: center;
+}
+
+.table__cell--inactive {
+  background-color: var(--INACTIVE);
+}
+
+/* ||  NOTE */
+
+.note__created,
+.note__updated,
+.note__username {
+  display: none;
+}
+
+.note__status {
+  font-weight: bold;
+}
+
+.note__status--open {
+  color: var(--STATUS-OPEN);
+}
+
+.note__status--completed {
+  color: var(--STATUS-COMPLETE);
+}
+
+/* || FORM - GENERAL */
+
+.form {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.75em;
+  max-width: 800px;
+}
+
+.form__checkbox-container {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 0.5em;
+}
+
+.form__persist {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.5em;
+}
+
+.form__title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form__input,
+.form__submit-button {
+  padding: 0.5em;
+  border-radius: 15px;
+}
+
+.form__input--text {
+  min-height: 150px;
+}
+
+.form__input--incomplete {
+  border: 1px solid red;
+  outline: 1px solid red;
+}
+
+.form__checkbox {
+  width: 24px;
+  height: 24px;
+}
+
+.form__select {
+  width: fit-content;
+  padding: 0.25em;
+}
+
+.form__action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5em;
+  position: absolute;
+  right: 0.5em;
+}
+
+.form__row {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 2em;
+}
+
+.form__divider {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5em;
+}
+
+@media screen and (max-width: 400px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .dash-header__nav {
+    gap: 0;
+  }
+
+  .icon-button {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 1.25rem;
+  }
+
+  .dash-header {
+    padding: 0 1em;
+  }
+
+  .dash-container {
+    padding: 1em;
+  }
+
+  .table {
+    font-size: 1.5rem;
+  }
+
+  .table--notes {
+    grid-template-columns: repeat(3, 1fr) 2fr repeat(2, 1fr);
+  }
+
+  .note__created,
+  .note__updated,
+  .note__username {
+    display: block;
+  }
+
+  .form__action-buttons {
+    position: static;
+  }
 }

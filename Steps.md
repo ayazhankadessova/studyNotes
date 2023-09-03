@@ -155,7 +155,7 @@ noteSchema.plugin(AutoIncrement, {
 - [x] Create Note model
 - [x] Create Controllers
 
-## Frontend
+## 5. Frontend: React.JS
 
 1. Bootstrap
 
@@ -218,6 +218,52 @@ function App() {
 - [x] Work on features (Auth, NotesList, UsersList)
 - [x] Basic Layout and structure for our application next, we will be managing state with Redux and applying the API layer with rtk query
 
+## 6. Redux & RTK Query
+
+1. Get dependencies
+
+> npm i @reduxjs/toolkit react-redux
+
+2. Make `app` -> `api` -> `apiSlice`
+3. Make `store.js`
+4. Add `apiSlice` as reducer in `store.js`
+5. Provide `Store` to the application via adding `Provider` in `index.js`
+
+```
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/*' element={<App />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
+)
+```
+
+6. `UsersApi`
+7. normalize
+
+```
+// we have already set localhost:3500 as base, now we just add the endpoints -> getUsers
+// Validate status
+// Transform
+// return userAdapter
+```
+
+8. `NotesApiSlice`
+9. `UsersList`
+10. Get users using query-> destructure -> use grid table
+11. Create user component
+12. Dispatching an action means sending it to the store, which then passes it to the reducers. Reducers examine the action type and perform the necessary state updates.
+    educers give new state. When the state in the Redux store changes, the connected React components receive the updated data as props. They can then use that data to update their own UI and rerender if necessary.
+13. 'user.js -> table row
+14. import user to userlist
+15. DO same for `NotesList`
+
 ---
 
 ## Fixes
@@ -239,3 +285,14 @@ function App() {
 > https://www.geeksforgeeks.org/implement-nested-routes-in-react-js-react-router-dom-v6/
 
 3. Time Zones Database: https://www.iana.org/time-zones
+4. Redux: https://www.freecodecamp.org/news/what-is-redux-store-actions-reducers-explained/
+
+- Relies on the single immutable object to store all the application's state.
+- Dispatch -> action -> payload has the data that it wants to be changed -> reducer function
+- First make global store object
+- Provide the Stories
+- Pizza Slice (initial state) + Reducer logic (take the old state+ define logic required to change the state)
+- We can use reducer in UI component
+- Select state anywhere w/o content
+- useDispatch() -> to change application data -> sends action name and data payload on normal browser events, like a button click
+- serve application & install the redux dev tool browser extension (inspect & debug)
