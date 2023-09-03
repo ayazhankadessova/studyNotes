@@ -1,33 +1,33 @@
 {
-  "name": "studynotes",
+  "name": "Study Notes",
   "version": "1.0.0",
-  "description": "Study Notes Application with MERN Stack",
-  "main": "index.js",
+  "description": "Study notes",
+  "main": "server.js",
   "scripts": {
     "start": "node server",
-    "dev": "nodemon server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
+    "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "date-fns": "^2.30.0",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
+    "date-fns": "^2.29.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
     "express-async-handler": "^1.2.0",
-    "express-rate-limit": "^6.9.0",
+    "express-rate-limit": "^6.10.0",
     "helmet": "^7.0.0",
     "http-status-codes": "^2.2.0",
-    "jsonwebtoken": "^9.0.1",
-    "mongoose": "^7.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^6.5.0",
     "mongoose-sequence": "^5.3.1",
-    "nodemon": "^3.0.1",
-    "uuid": "^9.0.0",
-    "winston": "^3.10.0",
+    "uuid": "^8.3.2",
     "xss-clean": "^0.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }

@@ -18,6 +18,8 @@ const getAllNotes = asyncHandler(async (req, res) => {
     throw new BadRequestError('No notes found')
   }
 
+  // console.log(notes)
+
   // Add username to each note before sending the response
   // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE
   // You could also do this with a for...of loop
