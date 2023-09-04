@@ -51,14 +51,9 @@ const EditUserForm = (user) => {
   const onUsernameChanged = (e) => setUsername(e.target.value)
   const onPasswordChanged = (e) => setPassword(e.target.value)
 
-  // we are allowing more than one option to be selected
-  const onRolesChanged = (e) => {
-    const values = Array.from(
-      e.target.selectedOptions, //HTMLCollection
-      (option) => option.value
-    )
-    setRoles(values)
-  }
+  // Add OnActive Changed
+  // Add onSaveUserClicked
+  // add onDeleteUserClicked
 
   // check if we can save
   // All of these methods should be true
