@@ -12,7 +12,7 @@ const { response } = require('express')
 // @access Private
 const getAllUsers = asyncHandler(async (req, res) => {
   // dont return password
-  const users = await User.find().select('-passwords').lean()
+  const users = await User.find().select('-password').lean()
 
   //   if (!user?.length) -> optional chaining
 

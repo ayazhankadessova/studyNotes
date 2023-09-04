@@ -355,6 +355,7 @@ _manages states and validate input_
 
 1. Transfer pre-save hash password to User Schema
 2. [ ] Add `test.https`
+3. [ ] Add redux
 
 ## Learned
 
