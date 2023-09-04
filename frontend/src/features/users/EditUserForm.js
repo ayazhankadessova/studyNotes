@@ -51,25 +51,33 @@ const EditUserForm = (user) => {
   const onUsernameChanged = (e) => setUsername(e.target.value)
   const onPasswordChanged = (e) => setPassword(e.target.value)
 
-  // Add OnActive Changed
-  // Add onSaveUserClicked
-  // add onDeleteUserClicked
-
-  // check if we can save
-  // All of these methods should be true
-  // if not loading -> can save is true
-  const canSave =
-    [roles.length, validUsername, validPassword].every(Boolean) && !isLoading
-
-  const onSaveUserClicked = async (e) => {
-    e.preventDefault()
-    if (canSave) {
-      // add new User mutation
-      await addNewUser({ username, password, roles })
-    }
+  const onRolesChanged = (e) => {
+    const values = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    )
+    setRoles(values)
   }
 
-  // creating an option for every value in roles for the dropdown menu
+  // Add OnActive Changed
+
+  const onActiveChanged = () => setActive((prev) => !prev)
+
+  // Add onSaveUserClicked
+
+  const onSaveUserClicked = async (e) => {
+    // we don't require pwd
+    if (password) {
+      await updateUser({ id: user.id, username, password, roles, active })
+    } else {
+      await updateUser({ id: user.id, username, roles, active })
+    }
+  }
+  // add onDeleteUserClicked
+  const onDeleteUserClicked = async () => {
+    await deleteUser({ id: user.id })
+  }
+
   const options = Object.values(ROLES).map((role) => {
     return (
       <option key={role} value={role}>
@@ -79,32 +87,58 @@ const EditUserForm = (user) => {
     )
   })
 
-  // checking which class will be applied for the inputs
-  // add class if invalid
-  const errClass = isError ? 'errmsg' : 'offscreen'
+  // check if we can save
+  // All of these methods should be true
+  // if not loading -> can save is true
+
+  let canSave
+
+  if (password) {
+    canSave =
+      [roles.length, validUsername, validPassword].every(Boolean) && !isLoading
+  } else {
+    canSave = [roles.length, validUsername].every(Boolean) && !isLoading
+  }
+
+  const errClass = isError || isDelError ? 'errmsg' : 'offscreen'
   const validUserClass = !validUsername ? 'form__input--incomplete' : ''
-  const validPwdClass = !validPassword ? 'form__input--incomplete' : ''
+  const validPwdClass =
+    password && !validPassword ? 'form__input--incomplete' : ''
   const validRolesClass = !Boolean(roles.length)
     ? 'form__input--incomplete'
     : ''
 
+  // check for update / del error
+  const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
+
+  // has save & delete buttons -> they call mutations
+  // add active/not buttons
+  // other fields are same
   const content = (
     <>
-      {/* display error messages on the top if they occur */}
-      <p className={errClass}>{error?.data?.message}</p>
+      <p className={errClass}>{errContent}</p>
 
-      {/* onSaveUserClicked -> for the entire form */}
-      <form className='form' onSubmit={onSaveUserClicked}>
+      <form className='form' onSubmit={(e) => e.preventDefault()}>
         <div className='form__title-row'>
-          <h2>New User</h2>
+          <h2>Edit User</h2>
           <div className='form__action-buttons'>
-            {/* if we dont meet requirements for saving the new user, we are disabling this button */}
-            <button className='icon-button' title='Save' disabled={!canSave}>
+            <button
+              className='icon-button'
+              title='Save'
+              onClick={onSaveUserClicked}
+              disabled={!canSave}
+            >
               <FontAwesomeIcon icon={faSave} />
+            </button>
+            <button
+              className='icon-button'
+              title='Delete'
+              onClick={onDeleteUserClicked}
+            >
+              <FontAwesomeIcon icon={faTrashCan} />
             </button>
           </div>
         </div>
-        {/* label for each input */}
         <label className='form__label' htmlFor='username'>
           Username: <span className='nowrap'>[3-20 letters]</span>
         </label>
@@ -119,7 +153,8 @@ const EditUserForm = (user) => {
         />
 
         <label className='form__label' htmlFor='password'>
-          Password: <span className='nowrap'>[4-12 chars incl. !@#$%]</span>
+          Password: <span className='nowrap'>[empty = no change]</span>{' '}
+          <span className='nowrap'>[4-12 chars incl. !@#$%]</span>
         </label>
         <input
           className={`form__input ${validPwdClass}`}
@@ -130,10 +165,24 @@ const EditUserForm = (user) => {
           onChange={onPasswordChanged}
         />
 
+        <label
+          className='form__label form__checkbox-container'
+          htmlFor='user-active'
+        >
+          ACTIVE:
+          <input
+            className='form__checkbox'
+            id='user-active'
+            name='user-active'
+            type='checkbox'
+            checked={active}
+            onChange={onActiveChanged}
+          />
+        </label>
+
         <label className='form__label' htmlFor='roles'>
           ASSIGNED ROLES:
         </label>
-        {/* multiple=true -> can select more than one value */}
         <select
           id='roles'
           name='roles'
@@ -151,4 +200,4 @@ const EditUserForm = (user) => {
 
   return content
 }
-export default NewUserForm
+export default EditUserForm

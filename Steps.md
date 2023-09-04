@@ -326,7 +326,7 @@ _manages states and validate input_
 - [x] label for each input
 - [x] multiple=true -> can select more than one value
 
-9. `EditUser.js`
+9. Create `EditUser.js`
 
 ```
 // get user id out of the url
@@ -334,6 +334,20 @@ _manages states and validate input_
 // we created useSelector in the userApiSlice
 // if we have a user, pull the edit user form that we have not created yet
 ```
+
+10. Create `EditUserForm`
+
+- [x] Generally, very similar to `NewUserForm`, but uses `UpdateUser` & `DeleteUser` mutations.
+- [x] Has disable employee option
+- [x] Validate username & password
+- [x] Check if functions are successful (upd, del)
+- [x] handlers
+- [x] Add onClicked changes
+- [x] Check if we can save
+- [x] Check for update/del error
+- [x] Add Save & Del buttons -> They cann mutations
+- [x] Add Active / not active buttons
+- [x] Other fields are same
 
 ---
 
