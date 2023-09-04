@@ -6,6 +6,10 @@ import DashLayout from './components/DashLayout'
 import Welcome from './features/auth/Welcome'
 import NotesList from './features/notes/NotesList'
 import UsersList from './features/users/UsersList'
+import EditUser from './features/users/EditUser'
+import NewUserForm from './features/users/NewUserForm'
+import EditNote from './features/notes/EditNote'
+import NewNote from './features/notes/NewNote'
 
 function App() {
   return (
@@ -18,13 +22,18 @@ function App() {
         {/* nested routes  -> wrap around other components that are protected inside this route*/}
         <Route path='dash' element={<DashLayout />}>
           <Route index element={<Welcome />} />
-          {/* will add new note component, create note compinent, etc */}
-          <Route path='notes'>
-            <Route index element={<NotesList />} />
-          </Route>
 
           <Route path='users'>
             <Route index element={<UsersList />} />
+            <Route path=':id' element={<EditUser />} />
+            <Route path='new' element={<NewUserForm />} />
+          </Route>
+
+          {/* will add new note component, create note compinent, etc */}
+          <Route path='notes'>
+            <Route index element={<NotesList />} />
+            <Route path=':id' element={<EditNote />} />
+            <Route path='new' element={<NewNote />} />
           </Route>
         </Route>{' '}
         {/*End Dash*/}
