@@ -1,4 +1,4 @@
-export const roles = {
+export const ROLES = {
   Employee: 'Employee',
   Manager: 'Manager',
   Admin: 'Admin',
