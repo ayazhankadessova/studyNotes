@@ -269,6 +269,38 @@ root.render(
 14. import user to userlist
 15. Do same for `NotesList`
 
+## 7. React & Redux Forms
+
+1. Add other endpoints in `usersApiSlice` : `addNewUser`, `updateUser` using mutation
+2. invalidate
+
+```
+This means that you can set up your API so that firing a particular mutation will cause a specific query endpoint to consider its cached data invalid. Then, it will re-fetch the data if there is an active subscription. This helps ensure that your app always displays the most up-to-date information.
+```
+
+3. Add endpoints to `notesApiSlice`
+4. Add User placeholder components : `EditUser.js`, `NewUserForm.js`
+5. Add Notes placeholder components : `EditNote.js`, `NewNote.js`
+
+- so that we can do routing inside the `App.js`
+
+6. Add routes to `App.js`
+
+```
+<Route path='users'>
+  <Route index element={<UsersList />} />
+  <Route path=':id' element={<EditUser />} />
+  <Route path='new' element={<NewUserForm />} />
+</Route>
+
+{/* will add new note component, create note compinent, etc */}
+<Route path='notes'>
+  <Route index element={<NotesList />} />
+  <Route path=':id' element={<EditNote />} />
+  <Route path='new' element={<NewNote />} />
+</Route>
+```
+
 ---
 
 ## Fixes
