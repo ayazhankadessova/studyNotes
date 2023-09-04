@@ -39,14 +39,7 @@ const EditUserForm = (user) => {
 
   // check if both functions are successful: update & delete
   useEffect(() => {
-    if (isSuccess) {
-      setUsername('')
-      setPassword('')
-      setRoles([])
-      navigate('/dash/users')
-    }
-
-    if (isDelSuccess) {
+    if (isSuccess || isDelSuccess) {
       setUsername('')
       setPassword('')
       setRoles([])
