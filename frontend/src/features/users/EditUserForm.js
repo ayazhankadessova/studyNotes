@@ -8,7 +8,7 @@ import { ROLES } from '../../config/roles'
 const USER_REGEX = /^[A-z]{3,20}$/
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
 
-const EditUserForm = (user) => {
+const EditUserForm = ({ user }) => {
   const [updateUser, { isLoading, isSuccess, isError, error }] =
     useUpdateUserMutation()
 
@@ -19,7 +19,7 @@ const EditUserForm = (user) => {
 
   const navigate = useNavigate()
 
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState(user.username)
   const [validUsername, setValidUsername] = useState(false)
   const [password, setPassword] = useState('')
   const [validPassword, setValidPassword] = useState(false)
@@ -39,6 +39,7 @@ const EditUserForm = (user) => {
 
   // check if both functions are successful: update & delete
   useEffect(() => {
+    console.log(isSuccess)
     if (isSuccess || isDelSuccess) {
       setUsername('')
       setPassword('')
@@ -114,6 +115,7 @@ const EditUserForm = (user) => {
   // has save & delete buttons -> they call mutations
   // add active/not buttons
   // other fields are same
+
   const content = (
     <>
       <p className={errClass}>{errContent}</p>
