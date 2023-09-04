@@ -301,6 +301,40 @@ This means that you can set up your API so that firing a particular mutation wil
 </Route>
 ```
 
+7. Create `config` dir in src
+
+- we can export & use it in other files we need
+
+8. `NewUserForm.js` -> not public facing form, but for managers/owners -> not as strict
+
+_manages states and validate input_
+
+> AddNewUser -> can use, not activated immediately
+
+- [x] Specify starter states & defaults
+- [x] Validate Username & password
+- [x] if validation is success, make everything blank again and navigate to `dash/users`
+- [x] add handlers -> setUsername & pwd
+- [x] add onRolesChanged
+- [x] check if we can save. All of these methods should be true. If not loading -> can save
+- [x] onSaveUserClicked -> add new User mutation
+- [x] creating an option for every value in roles for the dropdown menu
+- [x] checking which class will be applied for the inputs -> error ones is error
+- [x] display error messages on the top if errors occur
+- [x] onSaveUserClicked -> for the entire form
+- [x] if we dont meet requirements for saving the new user, we are disabling this button
+- [x] label for each input
+- [x] multiple=true -> can select more than one value
+
+9. `EditUser.js`
+
+```
+// get user id out of the url
+// get user data from the state, not query
+// we created useSelector in the userApiSlice
+// if we have a user, pull the edit user form that we have not created yet
+```
+
 ---
 
 ## Fixes
@@ -333,3 +367,5 @@ This means that you can set up your API so that firing a particular mutation wil
 - Select state anywhere w/o content
 - useDispatch() -> to change application data -> sends action name and data payload on normal browser events, like a button click
 - serve application & install the redux dev tool browser extension (inspect & debug)
+
+5. Redux Registration: https://medium.com/@jebasuthan/react-user-registration-and-login-using-redux-81ec739e93d1
