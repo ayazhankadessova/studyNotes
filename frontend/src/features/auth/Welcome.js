@@ -18,9 +18,17 @@ const Welcome = () => {
         <Link to='/dash/notes'>View Study Notes</Link>
       </p>
 
+      <p>
+        <Link to='/dash/notes/new'>Add New Study Notes</Link>
+      </p>
+
       {/* will apply some roles */}
       <p>
         <Link to='/dash/users'>View User Settings</Link>
+      </p>
+
+      <p>
+        <Link to='/dash/notes/new'>Add New User</Link>
       </p>
     </section>
   )
