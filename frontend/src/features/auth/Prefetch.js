@@ -7,7 +7,8 @@ import { Outlet } from 'react-router-dom'
 const Prefetch = () => {
   // we want it to run when the component mounts
   // subscribe to state se we have access to it , and it does not expire in 5 seconds
-  // create manual subscription useing endpoints & initiate
+  // create manual subscription using endpoints & initiate
+  // if we go to unprotected pages -> unsubscribe
   useEffect(() => {
     console.log('subscribing')
     const notes = store.dispatch(notesApiSlice.endpoints.getNotes.initiate())
