@@ -349,13 +349,90 @@ _manages states and validate input_
 - [x] Add Active / not active buttons
 - [x] Other fields are same
 
----
+- [ ] Check `/dash/users/new`
+- [ ] Check delete user
+
+_We want to refresh some data, so it does not stale. We can use rtk query & redux for that_
+
+11. Refresh (Crucial when more than one person is working on the data)
+
+- `Store.js` -> setUpListeners -> Add `store.dispatch`
+
+```
+// we have enabled some things that we can use in our queries
+// in the usersList & NotesList
+setupListeners(store.dispatch)
+```
+
+- in `UsersList`, we used `useGetUsersQuery()`, but we can also pass some params -> `refetchOnMountOrArgChange()`, `refetchOnMountOrArgChange()` -> if u go to other window and come back.
+
+```
+ } = useGetUsersQuery(undefined, {
+    pollingInterval: 15000, // every 15 seconds // request notes every 15seconds
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+  })
+```
+
+- Add same for `NotesList`
+
+12. Add Path for `New Note` and `New User` -> Change `Welcome.js`
+
+```
+<p>
+  <Link to='/dash/notes/new'>Add New User</Link>
+</p>
+```
+
+13. Work on `NewNote` & `EditNote` component
+
+## _New User does not have a form because it uses all the new data. New Note and Edit Note have forms because they use some of the existing data_
+
+- useSelector & selectAllUsers
+- What content? NewNoteForm which is populated with users data to choose from -> we can assign that note to a user. Otherwise, loading message
+- return content
+
+```
+const NewNote = () => {
+  const users = useSelector(selectAllUsers)
+
+  const content = users ? <NewNoteForm users={users} /> : <p>Loading...</p>
+
+  return content
+}
+```
+
+14. `NewNoteForm`
+
+- bring data & edit pre-populated form to render that data
+- get note with that id
+- get users
+- content -> check if we have users & note -> pre-populate EditNoteForm with note & users
+
+```
+const EditNote = () => {
+  const { id } = useParams()
+
+  const note = useSelector((state) => selectNoteById(state, id))
+  const users = useSelector(selectAllUsers)
+
+  const content =
+    note && users ? (
+      <EditNoteForm note={note} users={users} />
+    ) : (
+      <p>Loading...</p>
+    )
+
+  return content
+}
+```
 
 ## Fixes
 
 1. Transfer pre-save hash password to User Schema
 2. [ ] Add `test.https`
 3. [ ] Add redux
+4. [ ] Delete User Not working
 
 ## Learned
 
