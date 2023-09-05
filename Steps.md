@@ -432,7 +432,10 @@ const EditNote = () => {
 1. Transfer pre-save hash password to User Schema
 2. [ ] Add `test.https`
 3. [ ] Add redux
-4. [ ] Delete User Not working
+4. [x] Delete User Not working
+5. [ ] New Note form not working
+
+4:08
 
 ## Learned
 
