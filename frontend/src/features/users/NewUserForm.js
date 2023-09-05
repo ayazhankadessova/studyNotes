@@ -98,7 +98,7 @@ const NewUserForm = () => {
         <div className='form__title-row'>
           <h2>New User</h2>
           <div className='form__action-buttons'>
-            {/* if we dont meet requirements for saving the new user, we are disabling this buttob */}
+            {/* if we dont meet requirements for saving the new user, we are disabling this button */}
             <button className='icon-button' title='Save' disabled={!canSave}>
               <FontAwesomeIcon icon={faSave} />
             </button>
