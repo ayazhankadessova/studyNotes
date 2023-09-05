@@ -14,7 +14,6 @@ const EditNoteForm = ({ note, users }) => {
   ] = useDeleteNoteMutation()
 
   const navigate = useNavigate()
-
   // setters: title, text, completed, userId -> based on note model
 
   const [title, setTitle] = useState(note.title)
@@ -22,10 +21,8 @@ const EditNoteForm = ({ note, users }) => {
   const [completed, setCompleted] = useState(note.completed)
   const [userId, setUserId] = useState(note.user)
 
-  // clean uo after success
-
+  // clean up after success
   useEffect(() => {
-    console.log(isSuccess)
     if (isSuccess || isDelSuccess) {
       setTitle('')
       setText('')
@@ -37,17 +34,15 @@ const EditNoteForm = ({ note, users }) => {
   // handlers
   const onTitleChanged = (e) => setTitle(e.target.value)
   const onTextChanged = (e) => setText(e.target.value)
-  const onCompletedChanged = (e) => setCompleted(e.target.value)
+  const onCompletedChanged = (e) => setCompleted((prev) => !prev)
   const onUserIdChanged = (e) => setUserId(e.target.value)
 
   // check if we can save
   // All of these methods should be true
   // if not loading -> can save is true
-
   const canSave = [title, text, userId].every(Boolean) && !isLoading
 
   // on save note clicked -> update note
-
   const onSaveNoteClicked = async (e) => {
     if (canSave) {
       await updateNote({ id: note.id, user: userId, title, text, completed })
@@ -57,6 +52,7 @@ const EditNoteForm = ({ note, users }) => {
   const onDeleteNoteClicked = async () => {
     await deleteNote({ id: note.id })
   }
+
   const created = new Date(note.createdAt).toLocaleString('en-US', {
     day: 'numeric',
     month: 'long',
@@ -86,6 +82,7 @@ const EditNoteForm = ({ note, users }) => {
   const errClass = isError || isDelError ? 'errmsg' : 'offscreen'
   const validTitleClass = !title ? 'form__input--incomplete' : ''
   const validTextClass = !text ? 'form__input--incomplete' : ''
+
   const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
 
   const content = (
