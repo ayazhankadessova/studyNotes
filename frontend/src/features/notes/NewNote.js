@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectAllUsers } from '../users/usersApiSlice'
 import NewNoteForm from './NewNoteForm'
@@ -13,5 +12,4 @@ const NewNote = () => {
 
   return content
 }
-
 export default NewNote
