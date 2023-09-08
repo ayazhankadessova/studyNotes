@@ -36,4 +36,36 @@ UserSchema.pre('save', async function () {
   this.password = await bcrypt.hash(this.password, salt)
 })
 
+UserSchema.methods.comparePassword = async function (givenPassword) {
+  const isMatch = bcrypt.compare(givenPassword, this.password) // true
+  return isMatch
+}
+
+UserSchema.methods.createAccessToken = function () {
+  return jwt.sign(
+    {
+      UserInfo: {
+        username: this.username,
+        roles: this.roles,
+      },
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: '10s',
+    }
+  )
+}
+
+UserSchema.methods.createRefreshToken = function () {
+  return jwt.sign(
+    {
+      username: this.username,
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: '1d',
+    }
+  )
+}
+
 module.exports = mongoose.model('User', UserSchema)

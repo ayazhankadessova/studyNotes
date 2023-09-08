@@ -478,6 +478,7 @@ REFRESH_TOKEN_SECRET=
 ```
 
 10. [ ] Work on `authController`
+11. [x] Add CreateRefreshToken & CreateAccessToken methods to User Model
 
 ## Fixes
 
