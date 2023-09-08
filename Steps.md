@@ -439,12 +439,45 @@ const EditNote = () => {
 
 1. [x] Add `auth` route in `server.js`
 2. [x] Router should have /.post, /refresh.get , /logout.post
-3. [ ] Create Auth Controller
+3. [x] Create Auth Controller (just placeholders for this stage)
+
+> Login, refresh, logout
+
 4. [x] Get `express-rate-limit`
 5. [x] Create `loginLimiter` in middleware
 6. [x] work on `loginLimiter`
 7. [x] Add login limiter to auth router
    > router.route('/').post(limiter)
+8. [x] Add controllers to authrouter
+
+- JWTs are referenced as a form of user identification, which is issued after the initial user authentication takes place. When a user completes their login, they are authenticated. Our Rest API will issue the client application & access token & refresh token.
+- Access Token=short time before it expires. For example 5-15 minutes. -> Send & receive access tokens as JSON data. We will store access tokens in our application state, so they will be automatically lost when the app is closed. We won't put these access tokens in local storage or cookies if you can store it somewhere with JS. Hacker can also retrieve it with JS.
+- Refresh Token = Long Time before it expires (several hours, day, days). -> Sent as `httpOnly` cookie. Not accessible via JS. Must have expiry at some point -> will make users login again.
+  **Refresh Tokens should not have ability to make new refresh Tokens, bc will be infinite.**
+- Overall Flow:
+
+```
+Issuing an access token after user authentication . The user's application can then access our rest api's protected routes with the access token until it expires. Our rest API will verify the token with middleware every time the token is used to make a request. When the access token does expire, the user's application will need to send the refresh token to our rest api's refresh endpoint to be granted a new access token.
+
+The refresh token is also issued after user authentication. Our rest api's refresh endpoint will verify the the token. If the refresh token is valid a new access token will be provided to the user's application and remember a refresh token must be allowed to expire at some point to prevent indefinite access.
+```
+
+9. [x] Create secret keys to create access and refresh tokens that are issued by our REST Api.
+
+- Create in terminal
+
+  > node
+  > require('crypto').randomBytes(64).toString('hex')
+  > copy and paste
+
+- `.env`:
+
+```
+ACCESS_TOKEN_SECRET=
+REFRESH_TOKEN_SECRET=
+```
+
+10. [ ] Work on `authController`
 
 ## Fixes
 
