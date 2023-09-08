@@ -442,7 +442,9 @@ const EditNote = () => {
 3. [ ] Create Auth Controller
 4. [x] Get `express-rate-limit`
 5. [x] Create `loginLimiter` in middleware
-6. [ ] work on `loginLimiter`
+6. [x] work on `loginLimiter`
+7. [x] Add login limiter to auth router
+   > router.route('/').post(limiter)
 
 ## Fixes
 

@@ -1,9 +1,8 @@
 const express = require('express')
 const router = express.Router()
-// const {
-// } = require('../controllers/authController')
+const limiter = require('../controllers/authController')
 
-router.route('/').post()
+router.route('/').post(limiter)
 
 router.route('/refresh').get()
 
