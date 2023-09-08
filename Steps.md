@@ -430,13 +430,24 @@ const EditNote = () => {
 - now, we can create a new note & new user.
 - can do all CRUD operations via frontend.
 
+## 8. Authentication vs Authorization
+
+- Authentication - the process of verifying who someone is.
+- Authorization - the process of verifying what resources a user has access to.
+- Login for user -> Authentication -> JSON Web Tokens
+- Users send JWTs back in a request Authorization header to prove they are authorized to access the REST API endpoints and data resources.
+
+1. [ ] Add `auth` route in `server.js`
+2. [ ] Router should have /.post, /refresh.get , /logout.post
+3. [ ] Create Auth Controller
+
 ## Fixes
 
 1. Transfer pre-save hash password to User Schema
 2. [ ] Add `test.https`
 3. [ ] Add redux
 4. [x] Delete User Not working
-5. [ ] New Note form not working via only link 
+5. [ ] New Note form not working via only link
 
 ## Learned
 
