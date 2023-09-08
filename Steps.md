@@ -349,8 +349,8 @@ _manages states and validate input_
 - [x] Add Active / not active buttons
 - [x] Other fields are same
 
-- [ ] Check `/dash/users/new`
-- [ ] Check delete user
+- [x] Check `/dash/users/new`
+- [x] Check delete user
 
 _We want to refresh some data, so it does not stale. We can use rtk query & redux for that_
 
@@ -427,15 +427,16 @@ const EditNote = () => {
 }
 ```
 
+- now, we can create a new note & new user.
+- can do all CRUD operations via frontend.
+
 ## Fixes
 
 1. Transfer pre-save hash password to User Schema
 2. [ ] Add `test.https`
 3. [ ] Add redux
 4. [x] Delete User Not working
-5. [ ] New Note form not working
-
-4:08
+5. [ ] New Note form not working via only link 
 
 ## Learned
 
