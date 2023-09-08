@@ -11,7 +11,29 @@ const { response } = require('express')
 // @route POST /auth
 // @access Public
 const login = asyncHandler(async (req, res) => {
-  // do stuff
+  const { username, password } = req.body
+
+  if (!username || !password) {
+    throw new BadRequestError('Please enter a valid username & a password')
+  }
+
+  const loginUser = await User.findOne({ username }).exec()
+
+  if (!loginUser || !loginUser.active) {
+    throw new UnauthenticatedError('Unauthorized.')
+  }
+
+  // compare password
+  const isPasswordMatch = await loginUser.comparePassword(password)
+
+  if (!isPasswordMatch) {
+    throw new UnauthenticatedError('Incorrect Password.')
+  }
+
+  // create a token
+  const token = loginUser.createToken()
+
+  res.status(StatusCodes.OK).json({ user: { name: loginUser.name }, token })
 })
 
 // @desc Refresh
