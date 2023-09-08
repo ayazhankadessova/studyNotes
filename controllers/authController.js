@@ -16,7 +16,19 @@ const login = asyncHandler(async (req, res) => {
 
 // @desc Refresh
 // @route GET /auth/refresh
-// @access Public - access token has expired
+// @access Public - access token has expired , the only way to have new access token is using refresh
+
 const refresh = asyncHandler(async (req, res) => {
   // do stuff
 })
+
+// @desc Logout
+// @route POST /auth/logout
+// @access Public - just to clear cookie if exists
+const logout = (req, res) => {}
+
+module.exports = {
+  login,
+  refresh,
+  logout,
+}
