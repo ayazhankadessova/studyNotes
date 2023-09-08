@@ -437,9 +437,12 @@ const EditNote = () => {
 - Login for user -> Authentication -> JSON Web Tokens
 - Users send JWTs back in a request Authorization header to prove they are authorized to access the REST API endpoints and data resources.
 
-1. [ ] Add `auth` route in `server.js`
-2. [ ] Router should have /.post, /refresh.get , /logout.post
+1. [x] Add `auth` route in `server.js`
+2. [x] Router should have /.post, /refresh.get , /logout.post
 3. [ ] Create Auth Controller
+4. [x] Get `express-rate-limit`
+5. [x] Create `loginLimiter` in middleware
+6. [ ] work on `loginLimiter`
 
 ## Fixes
 
