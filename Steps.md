@@ -479,6 +479,14 @@ REFRESH_TOKEN_SECRET=
 
 10. [ ] Work on `authController`
 11. [x] Add CreateRefreshToken & CreateAccessToken methods to User Model
+12. [x] Create verifyJWT
+13. [x] move verifyJWT to routes that we want to protect -> notesRouter & userRouter
+
+```
+const verifyJWT = require('../middleware/verifyJWT')
+// now verifyJWT is applied to all of the routes inside the router
+router.use(verifyJWT)
+```
 
 ## Fixes
 
