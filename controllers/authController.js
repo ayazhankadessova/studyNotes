@@ -31,23 +31,68 @@ const login = asyncHandler(async (req, res) => {
   }
 
   // create a token
-  const token = loginUser.createToken()
+  const accessToken = loginUser.createAccessToken()
+  const refreshToken = loginUser.createRefreshToken()
 
-  res.status(StatusCodes.OK).json({ user: { name: loginUser.name }, token })
+  // create secure cookie with refresh token
+  // when react hits refresh -> send cookie
+  res.cookie('jwt', refreshToken, {
+    httpOnly: true, // accessible only by user web server
+    secure: true, // https
+    sameSite: 'None', // cross site cookie , diff servers ok
+    maxAge: 7 * 24 * 60 * 60 * 1000, // cookie expiry: 7 days
+  })
+
+  // send access Token w/ username + roles
+  res.json({ accessToken })
 })
 
 // @desc Refresh
 // @route GET /auth/refresh
 // @access Public - access token has expired , the only way to have new access token is using refresh
+å
+const refresh = (req, res) => {
+  const cookies = req.cookies
 
-const refresh = asyncHandler(async (req, res) => {
-  // do stuff
-})
+  if (!cookies?.jwt) {
+    throw new UnauthenticatedError('Unauthorized.')
+  }
+
+  // if we have it, we will set the refresh token var to that cookie
+  const refreshToken = cookies.jwt
+
+  // verify
+  jwt.verify(
+    refreshToken,
+    process.env.REFRESH_TOKEN_SECRET,
+    asyncHandler(async (err, decoded) => {
+      if (err)
+        return res.status(StatusCodes.FORBIDDEN).json({ message: 'Forbidden' })
+
+      const foundUser = await User.findOne({
+        username: decoded.username,
+      }).exec()
+
+      if (!foundUser) {
+        throw new UnauthenticatedError('Unauthorized.')
+      }
+
+      const accessToken = foundUser.createAccessToken()
+
+      res.json({ accessToken })
+    })
+  )
+}
 
 // @desc Logout
 // @route POST /auth/logout
 // @access Public - just to clear cookie if exists
-const logout = (req, res) => {}
+const logout = (req, res) => {
+  const cookies = req.cookies
+  if (!cookies?.jwt) return res.sendStatus(StatusCodes.NO_CONTENT) //No content
+  res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true })
+  res.json({ message: 'Cookie cleared' })
+}
 
 module.exports = {
   login,

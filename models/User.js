@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 require('dotenv').config()
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 // need username & pwd
 
@@ -51,7 +52,7 @@ UserSchema.methods.createAccessToken = function () {
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
-      expiresIn: '10s',
+      expiresIn: '15m',
     }
   )
 }
