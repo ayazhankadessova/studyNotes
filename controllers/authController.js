@@ -50,7 +50,6 @@ const login = asyncHandler(async (req, res) => {
 // @desc Refresh
 // @route GET /auth/refresh
 // @access Public - access token has expired , the only way to have new access token is using refresh
-å
 const refresh = (req, res) => {
   const cookies = req.cookies
 
