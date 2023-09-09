@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const limiter = require('../controllers/authController')
+const limiter = require('../middleware/loginLimiter')
 
 const { login, refresh, logout } = require('../controllers/authController')
 
