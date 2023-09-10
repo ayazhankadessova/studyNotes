@@ -510,6 +510,44 @@ router.use(verifyJWT)
 - POST `http://localhost:3500/notes`
 - Add Authorization header -> Bearer & access token and make sure cookie (refresh token) is not expired
 
+- When this is forbidden, that's when we need to send a new refresh token to get a new access token & we will automate all of that inside of our react application using redux.
+
+## 9. Login Auth
+
+1. Create `authSlice` in `features` -> `auth` -> `authSlice`, which is not api slice, but is used for setting credentials and removing them during logout.
+
+```
+// not api slice
+
+import { createSlice } from '@reduxjs/toolkit'
+
+const authSlice = createSlice({
+  name: 'auth',
+  initialState: { token: null },
+  reducers: {
+    // payload will have access token
+    // then we will state.token to Access Token
+    // we are already in auth, so we don't have to set state.auth.token
+    setCredentials: (state, action) => {
+      const { accessToken } = action.payload
+      state.token = accessToken
+    },
+    // logOut reducer -> set state.toke to null at logout time
+    logOut: (state, action) => {
+      state.token = null
+    },
+  },
+})
+
+export const { setCredentials, logOut } = authSlice.actions
+export default authSlice.reducer
+// create one selector
+// auth is the name of the slice we created above
+export const selectCurrentToken = (state) => state.auth.token
+```
+
+2. Add it to the `Store.js`
+
 ## Fixes
 
 1. Transfer pre-save hash password to User Schema
