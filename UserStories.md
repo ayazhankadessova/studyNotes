@@ -6,7 +6,7 @@
 4. [x] Design a welcome page to be displayed after successful login.
 5. [ ] Ensure easy navigation throughout the app.
 6. [ ] Display the current user's information and assigned role.
-7. [ ] Include a logout option for users to exit the app.
+7. [x] Include a logout option for users to exit the app.
 8. [ ] Implement a requirement for users to log in at least once per week.
 9. [x] Provide a quick way to revoke user access if necessary.
 10. [x] Enable the assignment of notes to specific users.
