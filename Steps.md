@@ -547,6 +547,7 @@ export const selectCurrentToken = (state) => state.auth.token
 ```
 
 2. Add it to the `Store.js`
+3. Work on `authApiSlice`, inject endpoints
 
 ## Fixes
 
