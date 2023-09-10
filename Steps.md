@@ -488,6 +488,28 @@ const verifyJWT = require('../middleware/verifyJWT')
 router.use(verifyJWT)
 ```
 
+14. Test Auth
+    > http://localhost:3500/auth
+
+- We have Access Token in the body
+- refresh token: go to cookies under `send`
+- Change `https` -> `http`: remove `Secure`
+- We want `https` in deployment but not rn as we test
+
+> http://localhost:3500/auth/refresh
+
+- We get new access token because our refresh token was valid
+- our cookie is still there
+
+> http://localhost:3500/auth/logout
+
+- Cookie cleared
+
+15. Test the process
+
+- POST `http://localhost:3500/notes`
+- Add Authorization header -> Bearer & access token and make sure cookie (refresh token) is not expired
+
 ## Fixes
 
 1. Transfer pre-save hash password to User Schema
