@@ -58,7 +58,16 @@ const Login = () => {
       // handle your error
       if (!e.status) {
         setErrMsg('No Server Response')
+      } else if (e.status === 400) {
+        setErrMsg('Missing Username or Password')
+      } else if (e.status === 401) {
+        setErrMsg('Unauthorized')
+      } else {
+        setErrMsg(e.data?.message)
       }
+      // Focus is set on the error msg, which would be read by a screen reader as well bc we put aria=live attr set to assertive
+
+      errRef.current.focus()
     }
   }
 
