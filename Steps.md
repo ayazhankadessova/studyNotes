@@ -552,6 +552,16 @@ export const selectCurrentToken = (state) => state.auth.token
 
 TODO: add handlers in `Login` -> useEffect
 
+- add error right above the form with assertive
+
+```
+{/* assertive - should only be used for time-sensitive/critical notifications that
+    absolutely require the user's immediate attention */}
+    <p ref={errRef} className={errClass} aria-live='assertive'>
+      {errMsg}
+    </p>
+```
+
 ## Fixes
 
 1. Transfer pre-save hash password to User Schema
@@ -587,3 +597,7 @@ TODO: add handlers in `Login` -> useEffect
 - serve application & install the redux dev tool browser extension (inspect & debug)
 
 5. Redux Registration: https://medium.com/@jebasuthan/react-user-registration-and-login-using-redux-81ec739e93d1
+
+```
+
+```

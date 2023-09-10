@@ -20,6 +20,18 @@ const Login = () => {
   // we only need isLoading from this mutation
   const [login, { isLoading }] = useLoginMutation()
 
+  // handle refs
+  // only happens when the component loads -> puts focus on the username field
+  useEffect(() => {
+    useRef.current.focus()
+  })
+
+  // clear out the errorMsg state when the username or password state is changed
+  // User saw the error message and changed the username/password
+  useEffect(() => {
+    setErrMsg('')
+  }, [username, password])
+
   const errClass = errMsg ? 'errmsg' : 'offscreen'
 
   if (isLoading) {
@@ -34,10 +46,11 @@ const Login = () => {
       </header>
       {/* form starts  */}
       <main className='login'>
+        {/* assertive - should only be used for time-sensitive/critical notifications that
+        absolutely require the user's immediate attention */}
         <p ref={errRef} className={errClass} aria-live='assertive'>
           {errMsg}
         </p>
-
         {/* TODO: define Handle submit */}
         <form className='form' onSubmit={handleSubmit}>
           {/* htmlfor should align with id attr for the name */}
