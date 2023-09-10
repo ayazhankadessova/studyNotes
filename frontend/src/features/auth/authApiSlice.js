@@ -1,4 +1,3 @@
-import { credentials } from '../../../../config/corsOptions'
 import { apiSlice } from '../../app/api/apiSlice'
 // log out Action Creator
 import { logOut } from './authSlice'
