@@ -16,6 +16,8 @@ const Login = () => {
 
   // useNavigate hook brings navigate function
   // useDispatch hook brings dispatch function
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   // we only need isLoading from this mutation
   const [login, { isLoading }] = useLoginMutation()
@@ -31,6 +33,34 @@ const Login = () => {
   useEffect(() => {
     setErrMsg('')
   }, [username, password])
+
+  // Handlers: userInput, Pwd, Submit
+  const handleUserInput = (e) => setUsername(e.target.value)
+  const handlePwdInput = (e) => setPassword(e.target.value)
+
+  // handle submit for the form
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    // async request which may result error
+    try {
+      // get access Token after we call login mutation
+      // pass username, pwd state when username & pwd are complete
+      // unwrap -> try catch
+      const { accessToken } = await login({ username, password }).unwrap()
+      // dispatch setCredentials -> we will get the access token back -> get credentials
+      dispatch(setCredentials({ accessToken }))
+      // empty state
+      setUsername('')
+      setPassword('')
+      // move to dash
+      navigate('/dash')
+    } catch (e) {
+      // handle your error
+      if (!e.status) {
+        setErrMsg('No Server Response')
+      }
+    }
+  }
 
   const errClass = errMsg ? 'errmsg' : 'offscreen'
 
