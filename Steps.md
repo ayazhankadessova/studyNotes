@@ -562,6 +562,10 @@ TODO: add handlers in `Login` -> useEffect
     </p>
 ```
 
+- add handleSubmit
+
+5. Go to `DashHeader`
+
 ## Fixes
 
 1. Transfer pre-save hash password to User Schema
