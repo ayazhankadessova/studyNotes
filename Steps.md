@@ -548,6 +548,9 @@ export const selectCurrentToken = (state) => state.auth.token
 
 2. Add it to the `Store.js`
 3. Work on `authApiSlice`, inject endpoints
+4. Work on `Login` component -> which has a form
+
+TODO: add handlers in `Login` -> useEffect
 
 ## Fixes
 
