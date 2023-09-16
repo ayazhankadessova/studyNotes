@@ -5,6 +5,7 @@ import NewNoteForm from './NewNoteForm'
 const NewNote = () => {
   const users = useSelector(selectAllUsers)
 
+  // check the array length
   if (!users?.length) return <p>Not Currently Available</p>
 
   const content = <NewNoteForm users={users} />

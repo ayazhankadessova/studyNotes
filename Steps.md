@@ -570,6 +570,8 @@ TODO: add handlers in `Login` -> useEffect
 - add regex to decide if we want to display button on our header or not
 
 6. Test `Login`
+7. Add `Not available` after checking for array length8.
+8. Test `login`, but we are not providing token
 
 ## Fixes
 
