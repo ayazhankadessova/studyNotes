@@ -14,8 +14,8 @@ const EditNoteForm = ({ note, users }) => {
   ] = useDeleteNoteMutation()
 
   const navigate = useNavigate()
-
   // setters: title, text, completed, userId -> based on note model
+
   const [title, setTitle] = useState(note.title)
   const [text, setText] = useState(note.text)
   const [completed, setCompleted] = useState(note.completed)

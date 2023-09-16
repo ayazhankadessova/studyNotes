@@ -1,5 +1,6 @@
 // Use Query inside functional component. Check isLoading, isSuccess, isError
 // render content
+
 import { useGetNotesQuery } from './notesApiSlice'
 import Note from './Note'
 

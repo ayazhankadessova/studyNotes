@@ -2,6 +2,9 @@ import { useSelector } from 'react-redux'
 import { selectAllUsers } from '../users/usersApiSlice'
 import NewNoteForm from './NewNoteForm'
 
+// get users
+// attach newnoteform for users
+
 const NewNote = () => {
   const users = useSelector(selectAllUsers)
 

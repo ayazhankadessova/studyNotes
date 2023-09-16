@@ -8,6 +8,7 @@ import EditNoteForm from './EditNoteForm'
 // get note with that id
 // get users
 // content -> check if we have users & note -> pre-populate EditNoteForm with note & users
+
 const EditNote = () => {
   const { id } = useParams()
 
