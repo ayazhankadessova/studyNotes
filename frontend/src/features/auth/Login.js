@@ -15,7 +15,7 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState('')
 
   // useNavigate hook brings navigate function
-  // useDispatch hook brings dispatch function
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -25,8 +25,8 @@ const Login = () => {
   // handle refs
   // only happens when the component loads -> puts focus on the username field
   useEffect(() => {
-    useRef.current.focus()
-  })
+    userRef.current.focus()
+  }, [])
 
   // clear out the errorMsg state when the username or password state is changed
   // User saw the error message and changed the username/password
@@ -34,65 +34,52 @@ const Login = () => {
     setErrMsg('')
   }, [username, password])
 
-  // Handlers: userInput, Pwd, Submit
-  const handleUserInput = (e) => setUsername(e.target.value)
-  const handlePwdInput = (e) => setPassword(e.target.value)
-
   // handle submit for the form
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // async request which may result error
     try {
+      const { accessToken } = await login({ username, password }).unwrap()
       // get access Token after we call login mutation
       // pass username, pwd state when username & pwd are complete
       // unwrap -> try catch
-      const { accessToken } = await login({ username, password }).unwrap()
       // dispatch setCredentials -> we will get the access token back -> get credentials
       dispatch(setCredentials({ accessToken }))
-      // empty state
       setUsername('')
       setPassword('')
-      // move to dash
       navigate('/dash')
-    } catch (e) {
-      // handle your error
-      if (!e.status) {
+    } catch (err) {
+      if (!err.status) {
         setErrMsg('No Server Response')
-      } else if (e.status === 400) {
+      } else if (err.status === 400) {
         setErrMsg('Missing Username or Password')
-      } else if (e.status === 401) {
+      } else if (err.status === 401) {
         setErrMsg('Unauthorized')
       } else {
-        setErrMsg(e.data?.message)
+        setErrMsg(err.data?.message)
       }
       // Focus is set on the error msg, which would be read by a screen reader as well bc we put aria=live attr set to assertive
-
       errRef.current.focus()
     }
   }
 
+  const handleUserInput = (e) => setUsername(e.target.value)
+  const handlePwdInput = (e) => setPassword(e.target.value)
+
   const errClass = errMsg ? 'errmsg' : 'offscreen'
 
-  if (isLoading) {
-    return <p>Loading...</p>
-  }
+  if (isLoading) return <p>Loading...</p>
 
   const content = (
     <section className='public'>
-      {/* provide ur own header */}
       <header>
         <h1>Employee Login</h1>
       </header>
-      {/* form starts  */}
       <main className='login'>
-        {/* assertive - should only be used for time-sensitive/critical notifications that
-        absolutely require the user's immediate attention */}
         <p ref={errRef} className={errClass} aria-live='assertive'>
           {errMsg}
         </p>
-        {/* TODO: define Handle submit */}
+
         <form className='form' onSubmit={handleSubmit}>
-          {/* htmlfor should align with id attr for the name */}
           <label htmlFor='username'>Username:</label>
           <input
             className='form__input'
@@ -100,7 +87,6 @@ const Login = () => {
             id='username'
             ref={userRef}
             value={username}
-            // {/* TODO: define Handle User Input */}
             onChange={handleUserInput}
             autoComplete='off'
             required
@@ -109,15 +95,12 @@ const Login = () => {
           <label htmlFor='password'>Password:</label>
           <input
             className='form__input'
-            // dont show entry
             type='password'
             id='password'
-            // TODO: define
             onChange={handlePwdInput}
             value={password}
             required
           />
-          {/* submit button */}
           <button className='form__submit-button'>Sign In</button>
         </form>
       </main>

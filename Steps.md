@@ -566,6 +566,11 @@ TODO: add handlers in `Login` -> useEffect
 
 5. Go to `DashHeader`
 
+- Add `LogOut`
+- add regex to decide if we want to display button on our header or not
+
+6. Test `Login`
+
 ## Fixes
 
 1. Transfer pre-save hash password to User Schema
