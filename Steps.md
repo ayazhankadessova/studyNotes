@@ -571,7 +571,7 @@ TODO: add handlers in `Login` -> useEffect
 
 6. Test `Login`
 7. Add `Not available` after checking for array length8.
-8. Test `login`, but we are not providing token
+8. Test `login`, we get token, , but we are not providing token
 
 ## Fixes
 
