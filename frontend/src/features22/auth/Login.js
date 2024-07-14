@@ -70,9 +70,7 @@ const Login = () => {
 
   const content = (
     <section className='public'>
-      <header>
-        <h1>Employee Login</h1>
-      </header>
+      <header></header>
       <main className='login'>
         <p ref={errRef} className={errClass} aria-live='assertive'>
           {errMsg}

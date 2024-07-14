@@ -25,8 +25,6 @@ const DashFooter = () => {
     <footer className='dash-footer'>
       {/* will appear if not already on home page */}
       {goHomeButton}
-      <p>Current User:</p>
-      <p>Status:</p>
     </footer>
   )
   return content
