@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { Button } from '@material-ui/core'
 
 const DashFooter = () => {
   const navigate = useNavigate()
@@ -11,13 +11,9 @@ const DashFooter = () => {
   let goHomeButton = null
   if (pathname !== '/dash') {
     goHomeButton = (
-      <button
-        className='dash-footer__button icon-button'
-        title='Home'
-        onClick={onGoHomeClicked}
-      >
-        <FontAwesomeIcon icon={faHouse} />
-      </button>
+      <Button variant='contained' color='primary' onClick={onGoHomeClicked}>
+        Home
+      </Button>
     )
   }
 
@@ -29,4 +25,5 @@ const DashFooter = () => {
   )
   return content
 }
+
 export default DashFooter

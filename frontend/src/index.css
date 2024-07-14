@@ -9,9 +9,9 @@
 /* || VARIABLES */
 :root {
   /* COLORS */
-  --BGCOLOR: rgba(167, 194, 240, 0.9);
+  --BGCOLOR: rgba(141, 166, 209, 0.9);
   --BORDER-COLOR: #fff;
-  --COLOR: #fff;
+  --COLOR: #6c6c6c;
   --ERROR: firebrick;
   --INACTIVE: lightgray;
   --LINK-COLOR: whitesmoke;

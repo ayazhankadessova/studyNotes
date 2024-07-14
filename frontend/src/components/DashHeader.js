@@ -2,16 +2,12 @@ import { useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate, Link, useLocation } from 'react-router-dom'
-
 import { useSendLogoutMutation } from '../features/auth/authApiSlice'
+import { Button } from '@material-ui/core'
 
 const DASH_REGEX = /^\/dash(\/)?$/
 const NOTES_REGEX = /^\/dash\/notes(\/)?$/
 const USERS_REGEX = /^\/dash\/users(\/)?$/
-
-// destructure pathname from the useLocation hook
-// sendLogout from Logout mutation hook
-// add more buttons later when we have diff permissions worked out
 
 const DashHeader = () => {
   const navigate = useNavigate()
@@ -29,7 +25,6 @@ const DashHeader = () => {
   if (isError) return <p>Error: {error.data?.message}</p>
 
   let dashClass = null
-  // make sure we are not on the notes list, users list or the dash itself
   if (
     !DASH_REGEX.test(pathname) &&
     !NOTES_REGEX.test(pathname) &&
@@ -39,9 +34,14 @@ const DashHeader = () => {
   }
 
   const logoutButton = (
-    <button className='icon-button' title='Logout' onClick={sendLogout}>
-      <FontAwesomeIcon icon={faRightFromBracket} />
-    </button>
+    <Button
+      variant='contained'
+      color='secondary'
+      startIcon={<FontAwesomeIcon icon={faRightFromBracket} />}
+      onClick={sendLogout}
+    >
+      Logout
+    </Button>
   )
 
   const content = (
@@ -50,14 +50,12 @@ const DashHeader = () => {
         <Link to='/dash'>
           <h1 className='dash-header__title'>techNotes</h1>
         </Link>
-        <nav className='dash-header__nav'>
-          {/* add more buttons later */}
-          {logoutButton}
-        </nav>
+        <nav className='dash-header__nav'>{logoutButton}</nav>
       </div>
     </header>
   )
 
   return content
 }
+
 export default DashHeader
