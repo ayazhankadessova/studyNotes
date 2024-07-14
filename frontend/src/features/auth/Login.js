@@ -1,9 +1,18 @@
 import { useRef, useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-
 import { useDispatch } from 'react-redux'
 import { setCredentials } from './authSlice'
 import { useLoginMutation } from './authApiSlice'
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Container,
+  Grid,
+  Snackbar,
+  Alert,
+} from '@material-ui/core'
 
 const Login = () => {
   // set focus on user input
@@ -13,8 +22,6 @@ const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errMsg, setErrMsg] = useState('')
-
-  // useNavigate hook brings navigate function
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -39,10 +46,6 @@ const Login = () => {
     e.preventDefault()
     try {
       const { accessToken } = await login({ username, password }).unwrap()
-      // get access Token after we call login mutation
-      // pass username, pwd state when username & pwd are complete
-      // unwrap -> try catch
-      // dispatch setCredentials -> we will get the access token back -> get credentials
       dispatch(setCredentials({ accessToken }))
       setUsername('')
       setPassword('')
@@ -57,7 +60,6 @@ const Login = () => {
       } else {
         setErrMsg(err.data?.message)
       }
-      // Focus is set on the error msg, which would be read by a screen reader as well bc we put aria=live attr set to assertive
       errRef.current.focus()
     }
   }
@@ -65,51 +67,81 @@ const Login = () => {
   const handleUserInput = (e) => setUsername(e.target.value)
   const handlePwdInput = (e) => setPassword(e.target.value)
 
-  const errClass = errMsg ? 'errmsg' : 'offscreen'
+  const isError = errMsg.length > 0
 
-  if (isLoading) return <p>Loading...</p>
+  if (isLoading) return <Typography variant='h6'>Loading...</Typography>
 
-  const content = (
-    <section className='public'>
-      <header>
-        <h1>Employee Login</h1>
-      </header>
-      <main className='login'>
-        <p ref={errRef} className={errClass} aria-live='assertive'>
-          {errMsg}
-        </p>
-
-        <form className='form' onSubmit={handleSubmit}>
-          <label htmlFor='username'>Username:</label>
-          <input
-            className='form__input'
-            type='text'
-            id='username'
-            ref={userRef}
-            value={username}
-            onChange={handleUserInput}
-            autoComplete='off'
-            required
-          />
-
-          <label htmlFor='password'>Password:</label>
-          <input
-            className='form__input'
-            type='password'
-            id='password'
-            onChange={handlePwdInput}
-            value={password}
-            required
-          />
-          <button className='form__submit-button'>Sign In</button>
-        </form>
-      </main>
-      <footer>
-        <Link to='/'>Back to Home</Link>
-      </footer>
-    </section>
+  return (
+    <Container maxWidth='sm'>
+      <Box mt={8}>
+        <Typography variant='h4' align='center' gutterBottom>
+          Login
+        </Typography>
+        {isError && (
+          <Snackbar open={isError} autoHideDuration={6000}>
+            <Alert severity='error' ref={errRef} aria-live='assertive'>
+              {errMsg}
+            </Alert>
+          </Snackbar>
+        )}
+        <Box component='form' onSubmit={handleSubmit} noValidate>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                id='username'
+                label='Username'
+                name='username'
+                autoComplete='username'
+                inputRef={userRef}
+                value={username}
+                onChange={handleUserInput}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                required
+                fullWidth
+                name='password'
+                label='Password'
+                type='password'
+                id='password'
+                autoComplete='current-password'
+                value={password}
+                onChange={handlePwdInput}
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type='submit'
+            fullWidth
+            variant='contained'
+            color='primary'
+            className='form__submit-button'
+            disabled={isLoading}
+            style={{ marginTop: '20px' }}
+          >
+            Sign In
+          </Button>
+        </Box>
+      </Box>
+      <Box mt={2} style={{ marginTop: '20px' }}>
+        <Button
+          type='submit'
+          fullWidth
+          variant='contained'
+          color='primary'
+          className='form__submit-button'
+          href='/'
+        >
+          Back to Home
+        </Button>
+      </Box>
+    </Container>
   )
-
-  return content
 }
+
 export default Login

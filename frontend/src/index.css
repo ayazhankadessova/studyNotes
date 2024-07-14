@@ -7,10 +7,9 @@
 }
 
 /* || VARIABLES */
-
 :root {
   /* COLORS */
-  --BGCOLOR: #0f172a;
+  --BGCOLOR: rgba(167, 194, 240, 0.9);
   --BORDER-COLOR: #fff;
   --COLOR: #fff;
   --ERROR: firebrick;
@@ -60,11 +59,11 @@
 /* || GENERAL STYLES */
 
 body {
+  height: 100vh;
   font-family: 'Nunito', sans-serif;
   min-height: 100vh;
   background-color: var(--BGCOLOR);
   color: var(--COLOR);
-  background-image: url('./img/background.jpg');
   background-size: cover;
   background-position: top right;
   background-blend-mode: multiply;
