@@ -27,6 +27,7 @@ const Public = () => {
             to='/login'
             variant='contained'
             color='primary'
+            style={{ marginTop: '30px' }}
           >
             Login
           </Button>

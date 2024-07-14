@@ -1,7 +1,19 @@
-// Use Query inside functional component. Check isLoading, isSuccess, isError
-// render content
 import { useGetNotesQuery } from './notesApiSlice'
 import Note from './Note'
+
+// Material UI imports
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from '@mui/material'
 
 const NotesList = () => {
   const {
@@ -18,10 +30,30 @@ const NotesList = () => {
 
   let content
 
-  if (isLoading) content = <p>Loading...</p>
+  if (isLoading) {
+    content = (
+      <Box
+        display='flex'
+        justifyContent='center'
+        alignItems='center'
+        height='100%'
+      >
+        <CircularProgress />
+      </Box>
+    )
+  }
 
   if (isError) {
-    content = <p className='errmsg'>{error?.data?.message}</p>
+    content = (
+      <Box
+        display='flex'
+        justifyContent='center'
+        alignItems='center'
+        height='100%'
+      >
+        <Typography color='error'>{error?.data?.message}</Typography>
+      </Box>
+    )
   }
 
   if (isSuccess) {
@@ -32,34 +64,25 @@ const NotesList = () => {
       : null
 
     content = (
-      <table className='table table--notes'>
-        <thead className='table__thead'>
-          <tr>
-            <th scope='col' className='table__th note__status'>
-              Username
-            </th>
-            <th scope='col' className='table__th note__created'>
-              Created
-            </th>
-            <th scope='col' className='table__th note__updated'>
-              Updated
-            </th>
-            <th scope='col' className='table__th note__title'>
-              Title
-            </th>
-            <th scope='col' className='table__th note__username'>
-              Owner
-            </th>
-            <th scope='col' className='table__th note__edit'>
-              Edit
-            </th>
-          </tr>
-        </thead>
-        <tbody>{tableContent}</tbody>
-      </table>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Username</TableCell>
+              <TableCell>Created</TableCell>
+              <TableCell>Updated</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell>Owner</TableCell>
+              <TableCell>Edit</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{tableContent}</TableBody>
+        </Table>
+      </TableContainer>
     )
   }
 
   return content
 }
+
 export default NotesList
