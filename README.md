@@ -4,7 +4,15 @@
 
 ### studyNotes
 
-studyNotes is a platform designed to assist teams in effectively allocating tasks during group projects. The application features a structured team hierarchy, where every team has a designated Leader, Vice-Leader, and regular members. Each team member can **create new tasks, assign them to other team members**, and add detailed descriptions, as well as delete. All team members have visibility into the tasks and can see who they have been assigned to. When a team member completes a task, they have the ability to **mark it as "Completed."** The platform also allows the admin to **add new team members** as needed, ensuring the project can adapt to changing team composition over time.
+studyNotes is a platform designed to assist teams in effectively **allocating tasks** during group projects. The application features a structured team hierarchy, where every team has a designated Leader, Vice-Leader, and regular members. 
+
+Each team member can:
+- create new tasks,
+- assign them to other team members,
+- add detailed descriptions,
+- delete a task.
+
+All team members have visibility into the tasks and can see who they have been assigned to. When a team member completes a task, they have the ability to **mark it as "Completed✅ "** The platform also allows the admin to **add new team members** as needed, ensuring the project can adapt to changing team composition over time.
 
 ## <a id="Project-setup1"></a>🚀 Project Setup Backend
 
