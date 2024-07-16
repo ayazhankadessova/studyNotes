@@ -47,9 +47,11 @@ const Login = () => {
     try {
       const { accessToken } = await login({ username, password }).unwrap()
       dispatch(setCredentials({ accessToken }))
+      const temp = username
       setUsername('')
       setPassword('')
-      navigate('/dash')
+      // Send the username to the /dash route
+      navigate('/dash', { state: { temp } })
     } catch (err) {
       if (!err.status) {
         setErrMsg('No Server Response')
@@ -74,14 +76,17 @@ const Login = () => {
   return (
     <Container maxWidth='sm'>
       <Box mt={8}>
-        <Typography variant='h4' align='center' gutterBottom>
+        <Typography
+          variant='h4'
+          align='center'
+          gutterBottom
+          style={{ marginTop: 20 }}
+        >
           Login
         </Typography>
         {isError && (
           <Snackbar open={isError} autoHideDuration={6000}>
-            <Alert severity='error' ref={errRef} aria-live='assertive'>
-              {errMsg}
-            </Alert>
+            {errMsg}
           </Snackbar>
         )}
         <Box component='form' onSubmit={handleSubmit} noValidate>

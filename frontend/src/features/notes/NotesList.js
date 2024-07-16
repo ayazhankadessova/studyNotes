@@ -72,7 +72,7 @@ const NotesList = () => {
               <TableCell>Created</TableCell>
               <TableCell>Updated</TableCell>
               <TableCell>Title</TableCell>
-              <TableCell>Owner</TableCell>
+              <TableCell>Assigned To</TableCell>
               <TableCell>Edit</TableCell>
             </TableRow>
           </TableHead>

@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 const Welcome = () => {
+  const location = useLocation()
+  const { temp } = location.state
   const date = new Date()
   const today = new Intl.DateTimeFormat('en-US', {
     dateStyle: 'full',
@@ -12,7 +15,7 @@ const Welcome = () => {
     <section className='welcome'>
       <p>{today}</p>
 
-      <h1>Welcome!</h1>
+      <h1>Welcome, {temp}!</h1>
 
       <p>
         <Link to='/dash/notes'>View Study Notes</Link>
