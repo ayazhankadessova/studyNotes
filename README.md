@@ -19,7 +19,7 @@ All team members have visibility into the tasks and can see who they have been a
 _run backend & frontend_
 _ad your MongoDB URL_
 
-1. git cline project
+1. git clone project
 
 > git clone https://github.com/ayazhankadessova/studyNotes
 
