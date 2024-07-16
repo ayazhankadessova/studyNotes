@@ -1,21 +1,21 @@
 import { Link } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectUsername } from '../users/usersApiSlice'
 
 const Welcome = () => {
-  const location = useLocation()
-  const { temp } = location.state
   const date = new Date()
   const today = new Intl.DateTimeFormat('en-US', {
     dateStyle: 'full',
     timeStyle: 'long',
     timeZone: 'Asia/Hong_Kong',
   }).format(date)
+  const username = useSelector(selectUsername)
 
   const content = (
     <section className='welcome'>
       <p>{today}</p>
 
-      <h1>Welcome, {temp}!</h1>
+      <h1>Welcome {username}:) !</h1>
 
       <p>
         <Link to='/dash/notes'>View Study Notes</Link>

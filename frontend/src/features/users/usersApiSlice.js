@@ -4,8 +4,9 @@ import { apiSlice } from '../../app/api/apiSlice'
 // for normalized state
 const usersAdapter = createEntityAdapter({})
 
-const initialState = usersAdapter.getInitialState()
-
+const initialState = usersAdapter.getInitialState({
+  username: '',
+})
 // we have already set localhost:3500 as base, now we just add the endpoints -> getUsers
 // Validate status
 // Transform
@@ -66,6 +67,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       // invalidate specific id of the user
       invalidatesTags: (result, error, arg) => [{ type: 'User', id: arg.id }],
     }),
+    setUsername: builder.mutation({
+      query: (username) => ({
+        url: '/users/username',
+        method: 'PATCH',
+        body: { username },
+      }),
+      invalidatesTags: [{ type: 'User', id: 'LIST' }],
+    }),
   }),
 })
 
@@ -93,3 +102,10 @@ export const {
   selectIds: selectUserIds,
   // Pass in a selector that returns the users slice of state
 } = usersAdapter.getSelectors((state) => selectUsersData(state) ?? initialState)
+
+export const selectUsername = (state) => state.users?.username || ''
+export const setUserUsername = (username) => {
+  return (dispatch) => {
+    dispatch(usersApiSlice.endpoints.setUsername.initiate(username))
+  }
+}
