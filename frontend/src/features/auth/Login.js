@@ -151,12 +151,12 @@ const Login = () => {
 
       <Box mt={2} style={{ marginTop: '20px' }}>
         <Button
-          type='submit'
-          fullWidth
+          component={Link}
+          to='/signup'
           variant='contained'
+          fullWidth
           color='primary'
           className='form__submit-button'
-          href='/signup'
         >
           Sign Up
         </Button>
