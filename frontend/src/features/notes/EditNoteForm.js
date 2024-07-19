@@ -13,7 +13,7 @@ import {
   Button,
   Box,
   Grid,
-} from '@material-ui/core'
+} from '@mui/material'
 
 const EditNoteForm = ({ note, users }) => {
   const [updateNote, { isLoading, isSuccess, isError, error }] =

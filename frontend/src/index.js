@@ -7,7 +7,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { store } from './app/store'
 import { Provider } from 'react-redux'
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
@@ -18,3 +19,5 @@ ReactDOM.render(
     </Provider>
   </React.StrictMode>
 )
+
+

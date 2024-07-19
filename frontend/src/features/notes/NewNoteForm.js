@@ -8,8 +8,8 @@ import {
   Select,
   MenuItem,
   Typography,
-} from '@material-ui/core'
-import SaveIcon from '@material-ui/icons/Save'
+} from '@mui/material'
+import SaveIcon from '@mui/icons-material/Save'
 
 const NewNoteForm = ({ users }) => {
   const [addNewNote, { isLoading, isSuccess, isError, error }] =

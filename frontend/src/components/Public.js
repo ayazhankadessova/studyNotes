@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Typography, Button, Box } from '@material-ui/core'
+import { Typography, Button, Box } from '@mui/material'
 
 const Public = () => {
   const content = (

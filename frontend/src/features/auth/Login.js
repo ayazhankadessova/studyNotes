@@ -14,7 +14,7 @@ import {
   Grid,
   Snackbar,
   Alert,
-} from '@material-ui/core'
+} from '@mui/material'
 
 const Login = () => {
   // set focus on user input
