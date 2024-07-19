@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { selectUsername } from '../users/usersApiSlice'
+import { selectUsername } from '../users/usersSlice'
 
 const Welcome = () => {
   const date = new Date()
@@ -15,7 +15,7 @@ const Welcome = () => {
     <section className='welcome'>
       <p>{today}</p>
 
-      <h1>Welcome {username}:) !</h1>
+      <h1>Welcome, {username}:) !</h1>
 
       <p>
         <Link to='/dash/notes'>View Study Notes</Link>

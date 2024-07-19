@@ -1,4 +1,5 @@
 import { createSelector, createEntityAdapter } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { apiSlice } from '../../app/api/apiSlice'
 
 // for normalized state
@@ -67,14 +68,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       // invalidate specific id of the user
       invalidatesTags: (result, error, arg) => [{ type: 'User', id: arg.id }],
     }),
-    setUsername: builder.mutation({
-      query: (username) => ({
-        url: '/users/username',
-        method: 'PATCH',
-        body: { username },
-      }),
-      invalidatesTags: [{ type: 'User', id: 'LIST' }],
-    }),
   }),
 })
 
@@ -84,6 +77,19 @@ export const {
   useUpdateUserMutation,
   useDeleteUserMutation,
 } = usersApiSlice
+
+export const usersSlice = createSlice({
+  name: 'users',
+  initialState,
+  reducers: {
+    setUserUsername: (state, action) => {
+      console.log('here')
+      state.username = action.payload
+    },
+  },
+})
+
+export const { setUserUsername } = usersSlice.actions
 
 // returns the query result object
 export const selectUsersResult = usersApiSlice.endpoints.getUsers.select()
@@ -104,8 +110,9 @@ export const {
 } = usersAdapter.getSelectors((state) => selectUsersData(state) ?? initialState)
 
 export const selectUsername = (state) => state.users?.username || ''
-export const setUserUsername = (username) => {
-  return (dispatch) => {
-    dispatch(usersApiSlice.endpoints.setUsername.initiate(username))
-  }
-}
+// export const setUserUsername = (username) => {
+//   console.log(username)
+//   return (dispatch) => {
+//     dispatch(usersApiSlice.endpoints.setUsername.initiate(username))
+//   }
+// }

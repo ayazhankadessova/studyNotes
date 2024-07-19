@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from './authSlice'
 import { useLoginMutation } from './authApiSlice'
-import { setUserUsername } from '../users/usersApiSlice'
+import { setUserUsername } from '../users/usersSlice'
 
 import {
   Box,
@@ -49,7 +49,8 @@ const Login = () => {
     try {
       const { accessToken } = await login({ username, password }).unwrap()
       dispatch(setCredentials({ accessToken }))
-      // dispatch(setUserUsername({ username }))
+      console.log(username)
+      dispatch(setUserUsername(username))
       setUsername('')
       setPassword('')
       // Send the username to the /dash route
