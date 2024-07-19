@@ -18,7 +18,7 @@ const Public = () => {
         </header>
         <main className='public__main'>
           <Typography variant='body1' gutterBottom>
-            Store your Study Notes here!
+            Collaborate on group projects & Store your notes here!
           </Typography>
           <Button
             component={Link}
