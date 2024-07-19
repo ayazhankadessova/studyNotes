@@ -20,8 +20,6 @@ const Public = () => {
           <Typography variant='body1' gutterBottom>
             Store your Study Notes here!
           </Typography>
-        </main>
-        <footer>
           <Button
             component={Link}
             to='/login'
@@ -31,7 +29,7 @@ const Public = () => {
           >
             Login
           </Button>
-        </footer>
+        </main>
       </Box>
     </section>
   )
