@@ -1,71 +1,61 @@
-import { useRef, useState, useEffect } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import React, { useRef, useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { setCredentials } from './authSlice'
-import { useLoginMutation } from './authApiSlice'
-import { setUserUsername } from '../users/usersSlice'
-
 import {
-  Box,
-  TextField,
   Button,
-  Typography,
   Container,
   Grid,
   Snackbar,
-  Alert,
+  TextField,
+  Typography,
+  Box,
 } from '@mui/material'
+import { useAddNewUserMutation } from '../users/usersApiSlice' // Assuming this is the correct import path for addNewUser
+import { setUserUsername } from '../users/usersSlice'
 
-const Login = () => {
-  // set focus on user input
-  const userRef = useRef()
-  // set focus if there is an error
-  const errRef = useRef()
+const Signup = () => {
+  const usernameRef = useRef()
+  const passwordRef = useRef()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errMsg, setErrMsg] = useState('')
+  const [isSuccessSnackbarOpen, setIsSuccessSnackbarOpen] = useState(false)
 
-  const navigate = useNavigate()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  // we only need isLoading from this mutation
-  const [login, { isLoading }] = useLoginMutation()
+  const [addNewUser, { isLoading }] = useAddNewUserMutation()
 
-  // handle refs
-  // only happens when the component loads -> puts focus on the username field
   useEffect(() => {
-    userRef.current.focus()
+    usernameRef.current.focus()
   }, [])
 
-  // clear out the errorMsg state when the username or password state is changed
-  // User saw the error message and changed the username/password
   useEffect(() => {
     setErrMsg('')
   }, [username, password])
 
-  // handle submit for the form
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const { accessToken } = await login({ username, password }).unwrap()
-      dispatch(setCredentials({ accessToken }))
-      console.log(username)
+      const newUser = { username, password }
+      await addNewUser(newUser).unwrap()
       dispatch(setUserUsername(username))
       setUsername('')
       setPassword('')
-      // Send the username to the /dash route
-      navigate('/dash')
+      setIsSuccessSnackbarOpen(true)
+      setTimeout(() => {
+        setIsSuccessSnackbarOpen(false)
+        navigate('/login') // Redirect to login after successful signup
+      }, 3000) // Close Snackbar after 3 seconds and redirect
     } catch (err) {
       if (!err.status) {
         setErrMsg('No Server Response')
       } else if (err.status === 400) {
-        setErrMsg('Missing Username or Password')
-      } else if (err.status === 401) {
-        setErrMsg('Unauthorized')
+        setErrMsg('Invalid Username or Password')
       } else {
-        setErrMsg(err.data?.message)
+        setErrMsg(err.data?.message || 'Something went wrong')
       }
-      errRef.current.focus()
+      passwordRef.current.focus()
     }
   }
 
@@ -74,22 +64,15 @@ const Login = () => {
 
   const isError = errMsg.length > 0
 
-  if (isLoading) return <Typography variant='h6'>Loading...</Typography>
-
   return (
     <Container maxWidth='sm'>
       <Box mt={8}>
-        <Typography
-          variant='h4'
-          align='center'
-          gutterBottom
-          style={{ marginTop: 20 }}
-        >
-          Login
+        <Typography variant='h4' align='center' gutterBottom>
+          Sign Up
         </Typography>
         {isError && (
           <Snackbar open={isError} autoHideDuration={6000}>
-            {errMsg}
+            <Typography>{errMsg}</Typography>
           </Snackbar>
         )}
         <Box component='form' onSubmit={handleSubmit} noValidate>
@@ -103,7 +86,7 @@ const Login = () => {
                 label='Username'
                 name='username'
                 autoComplete='username'
-                inputRef={userRef}
+                inputRef={usernameRef}
                 value={username}
                 onChange={handleUserInput}
               />
@@ -118,6 +101,7 @@ const Login = () => {
                 type='password'
                 id='password'
                 autoComplete='current-password'
+                inputRef={passwordRef}
                 value={password}
                 onChange={handlePwdInput}
               />
@@ -132,37 +116,23 @@ const Login = () => {
             disabled={isLoading}
             style={{ marginTop: '20px' }}
           >
-            Sign In
+            Sign Up
           </Button>
         </Box>
       </Box>
       <Box mt={2} style={{ marginTop: '20px' }}>
         <Button
-          type='submit'
           fullWidth
           variant='contained'
           color='primary'
-          className='form__submit-button'
-          href='/'
+          component={Link}
+          to='/'
         >
           Back to Home
-        </Button>
-      </Box>
-
-      <Box mt={2} style={{ marginTop: '20px' }}>
-        <Button
-          type='submit'
-          fullWidth
-          variant='contained'
-          color='primary'
-          className='form__submit-button'
-          href='/signup'
-        >
-          Sign Up
         </Button>
       </Box>
     </Container>
   )
 }
 
-export default Login
+export default Signup

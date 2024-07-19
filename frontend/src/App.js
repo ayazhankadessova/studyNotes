@@ -11,6 +11,7 @@ import NewUserForm from './features/users/NewUserForm'
 import EditNote from './features/notes/EditNote'
 import NewNote from './features/notes/NewNote'
 import Prefetch from './features/auth/Prefetch'
+import SignUp from './features/auth/SignUp'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         {/* default component */}
         <Route index element={<Public />} />
         <Route path='login' element={<Login />} />
+        <Route path='signup' element={<SignUp />} />
         {/* protected layouts */}
         <Route element={<Prefetch />}>
           {/* nested routes  -> wrap around other components that are protected inside this route*/}
