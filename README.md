@@ -1,8 +1,13 @@
-![ayazhan-studyNotes](https://github.com/user-attachments/assets/3a9a0f69-475c-44e6-89d1-8eed1cbac351)
+## StudyNotes 😎 
+
+- Check out live demo: https://study-notes-frontend-ayazhankadessovas-projects.vercel.app
+- Sign Up, Sign In :)
+
+### Demo
+
+![ayazhan-studyNotes](https://github.com/user-attachments/assets/462f44c8-fe18-4457-b19d-268584fe6360)
 
 ## 📖 About
-
-### studyNotes
 
 studyNotes is a platform designed to assist teams in effectively **allocating tasks** during group projects. The application features a structured team hierarchy, where every team has a designated Leader, Vice-Leader, and regular members.
 
