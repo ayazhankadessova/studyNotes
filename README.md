@@ -1,7 +1,7 @@
 ## StudyNotes 😎 
 
--> Check out live demo: https://study-notes-frontend-ayazhankadessovas-projects.vercel.app
--> Sign Up, Sign In :)
+- Check out live demo: https://study-notes-frontend-ayazhankadessovas-projects.vercel.app
+- Sign Up, Sign In :)
 
 ### Demo
 
