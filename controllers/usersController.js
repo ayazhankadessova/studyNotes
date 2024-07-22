@@ -30,21 +30,21 @@ const createNewUser = asyncHandler(async (req, res) => {
 
   // confirm data
 
-  // if (!username || !password || !Array.isArray(roles) || !roles.length) {
-  //   throw new BadRequestError('All fields are required.')
+  if (!username || !password || !Array.isArray(roles) || !roles.length) {
+    throw new BadRequestError('All fields are required.')
 
-  //   // TODO: check if error thrown
-  //   // return res.status(400).json({message: 'All fields are required.'})
-  // }
+    // TODO: check if error thrown
+    // return res.status(400).json({message: 'All fields are required.'})
+  }
 
-  // // check for duplicate , lean for faster lookup
-  // const duplicate = await User.findOne({ username }).lean().exec()
+  // check for duplicate , lean for faster lookup
+  const duplicate = await User.findOne({ username }).lean().exec()
 
-  // if (duplicate) {
-  //   return res
-  //     .status(StatusCodes.CONFLICT)
-  //     .json({ message: 'Duplicate username' })
-  // }
+  if (duplicate) {
+    return res
+      .status(StatusCodes.CONFLICT)
+      .json({ message: 'Duplicate username' })
+  }
 
   // Hash password
   // TODO: transfer to model

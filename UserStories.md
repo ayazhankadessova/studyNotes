@@ -20,5 +20,3 @@
 18. [ ] Provide exclusive access to User Settings for Managers and Admins.
 19. [ ] Enable Managers and Admins to create new user accounts.
 20. [ ] Prioritize desktop mode as the primary interface while ensuring mobile accessibility.
-
-cmd+shirt+v->preview

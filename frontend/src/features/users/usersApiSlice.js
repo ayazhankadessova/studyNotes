@@ -76,6 +76,7 @@ export const {
   useAddNewUserMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
+  setUserUsername,
 } = usersApiSlice
 
 export const usersSlice = createSlice({
@@ -89,7 +90,7 @@ export const usersSlice = createSlice({
   },
 })
 
-export const { setUserUsername } = usersSlice.actions
+// export const { setUserUsername } = usersSlice.actions
 
 // returns the query result object
 export const selectUsersResult = usersApiSlice.endpoints.getUsers.select()
