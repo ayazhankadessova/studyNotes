@@ -28,6 +28,8 @@ const getAllUsers = asyncHandler(async (req, res) => {
 const createNewUser = asyncHandler(async (req, res) => {
   const { username, password, roles } = req.body
 
+  req.body.username = 'Ayazhan'
+
   // confirm data
 
   if (!username || !password || !Array.isArray(roles) || !roles.length) {
