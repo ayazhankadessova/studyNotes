@@ -1,4 +1,5 @@
-![ayazhan-studyNotes](https://github.com/user-attachments/assets/3a9a0f69-475c-44e6-89d1-8eed1cbac351)
+
+![ayazhan-studyNotes](https://github.com/user-attachments/assets/462f44c8-fe18-4457-b19d-268584fe6360)
 
 ## 📖 About
 
