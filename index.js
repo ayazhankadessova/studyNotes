@@ -70,7 +70,7 @@ const start = async () => {
   try {
     await connectDB()
     app.listen(PORT, () =>
-      console.log(`Server is listening on port ${PORT}...`)
+      console.log(`Server is listening on port new ${PORT}...`)
     )
   } catch (error) {
     console.log(error)
