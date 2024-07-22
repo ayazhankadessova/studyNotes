@@ -104,7 +104,7 @@ const EditNoteForm = ({ note, users }) => {
 
       <form className='form' onSubmit={(e) => e.preventDefault()}>
         <Box mb={2}>
-          <Grid container justify='space-between' alignItems='center'>
+          <Grid container justify='space-between'>
             <Grid item>
               <Typography variant='h5'>Edit Note #{note.ticket}</Typography>
             </Grid>
