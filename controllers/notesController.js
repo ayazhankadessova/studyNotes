@@ -53,12 +53,11 @@ const createNewNote = asyncHandler(async (req, res) => {
       .json({ message: 'Duplicate note title' })
   }
 
-  const userName = 'Default'
   const titleName = 'Default'
   const textName = 'Default'
 
   // Create and store the new user
-  const note = await Note.create({ userName, titleName, textName })
+  const note = await Note.create({ user, titleName, textName })
 
   if (note) {
     // Created
