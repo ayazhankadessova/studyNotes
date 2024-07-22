@@ -1,5 +1,6 @@
 ## StudyNotes 😎 
 
+- not uni project, built for fun
 - Check out live demo: https://study-notes-frontend-ayazhankadessovas-projects.vercel.app
 - Sign Up, Sign In :)
 
