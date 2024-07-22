@@ -83,10 +83,10 @@ const EditNoteForm = ({ note, users }) => {
 
   const options = users.map((user) => {
     return (
-      <option key={user.id} value={user.id}>
+      <MenuItem key={user.id} value={user.id}>
         {' '}
         {user.username}
-      </option>
+      </MenuItem>
     )
   })
 
@@ -170,6 +170,7 @@ const EditNoteForm = ({ note, users }) => {
                 label='WORK COMPLETE'
               />
               <Select
+                labelId='note-username-label'
                 id='note-username'
                 name='username'
                 value={userId}
