@@ -105,10 +105,10 @@ const EditNoteForm = ({ note, users }) => {
       <form className='form' onSubmit={(e) => e.preventDefault()}>
         <Box mb={2}>
           <Grid container justify='space-between'>
-            <Grid item>
+            <Grid item xs={6} md={4}>
               <Typography variant='h5'>Edit Note #{note.ticket}</Typography>
             </Grid>
-            <Grid item>
+            <Grid item xs={6} md={8}>
               <Button
                 variant='contained'
                 color='primary'
