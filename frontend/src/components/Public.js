@@ -12,12 +12,28 @@ const Public = () => {
         justifyContent='center'
         height='100vh'
         textAlign='center'
-        sx={{ px: 2, py: 5 }}
+        sx={{
+          px: { xs: 1, sm: 2 },
+          py: { xs: 3, sm: 5 },
+        }}
       >
-        <Typography variant='h1' component='h1' gutterBottom>
+        <Typography
+          variant='h1'
+          component='h1'
+          gutterBottom
+          sx={{
+            fontSize: { xs: '2rem', sm: '3rem' },
+          }}
+        >
           Welcome to <span className='nowrap'>Study Notes!</span>
         </Typography>
-        <Typography variant='body1' gutterBottom>
+        <Typography
+          variant='body1'
+          gutterBottom
+          sx={{
+            fontSize: { xs: '1rem', sm: '1.25rem' },
+          }}
+        >
           Collaborate on group projects & store your notes here!
         </Typography>
         <Button
@@ -25,7 +41,12 @@ const Public = () => {
           to='/login'
           variant='contained'
           color='primary'
-          sx={{ mt: 4, px: 3, py: 3 }} // Adjust padding for better button size
+          sx={{
+            mt: 4,
+            px: { xs: 2, sm: 3 },
+            py: { xs: 2, sm: 3 },
+            fontSize: { xs: '1rem', sm: '1.25rem' },
+          }}
         >
           Get Started
         </Button>
