@@ -35,8 +35,7 @@ const createNewUser = asyncHandler(async (req, res) => {
   if (!username || !password || !Array.isArray(roles) || !roles.length) {
     throw new BadRequestError('All fields are required.')
 
-    // TODO: check if error thrown
-    // return res.status(400).json({message: 'All fields are required.'})
+    // Remove this for demo: return res.status(400).json({message: 'All fields are required.'})
   }
 
   // check for duplicate , lean for faster lookup
@@ -48,16 +47,16 @@ const createNewUser = asyncHandler(async (req, res) => {
       .json({ message: 'Duplicate username' })
   }
 
-  // Hash password
-  // TODO: transfer to model
-  //   const hashedPwd = await bcrypt.hash(password, 10)
-
-  //   const userObject = { username, password: hashedPwd, roles }
+  ;```
+  Hash password
+  transfer to model
+  const hashedPwd = await bcrypt.hash(password, 10)
+  const userObject = { username, password: hashedPwd, roles }
+  ```
 
   // Create and store new user
   // middleware hashes the password
   const user = await User.create({ ...req.body })
-  //   console.log(user)
 
   // successfully created user
   if (user) {

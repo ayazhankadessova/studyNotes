@@ -14,6 +14,7 @@ import {
   Box,
   Grid,
 } from '@mui/material'
+import PropTypes from 'prop-types'
 
 const EditNoteForm = ({ note, users }) => {
   const [updateNote, { isLoading, isSuccess, isError, error }] =
@@ -195,6 +196,25 @@ const EditNoteForm = ({ note, users }) => {
   )
 
   return content
+}
+
+EditNoteForm.propTypes = {
+  note: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+    user: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+    ticket: PropTypes.number.isRequired,
+  }).isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 }
 
 export default EditNoteForm

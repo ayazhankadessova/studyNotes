@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux'
 import { setCredentials } from './authSlice'
 import { useLoginMutation } from './authApiSlice'
 import { setUserUsername } from '../users/usersSlice'
-
 import {
   Box,
   TextField,
@@ -12,8 +11,6 @@ import {
   Typography,
   Container,
   Grid,
-  Snackbar,
-  Alert,
 } from '@mui/material'
 
 const Login = () => {

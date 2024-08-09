@@ -19,7 +19,7 @@ const login = asyncHandler(async (req, res) => {
 
   const loginUser = await User.findOne({ username }).exec()
 
-  if (!loginUser || !loginUser.active) {
+  if (!loginUser?.active) {
     throw new UnauthenticatedError('Unauthorized.')
   }
 

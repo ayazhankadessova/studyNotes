@@ -19,7 +19,7 @@ const Signup = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errMsg, setErrMsg] = useState('')
-  const [isSuccessSnackbarOpen, setIsSuccessSnackbarOpen] = useState(false)
+  const [setIsSuccessSnackbarOpen] = useState(false)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
