@@ -1,21 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
-
 import { useSelector } from 'react-redux'
 import { selectNoteById } from './notesApiSlice'
+import PropTypes from 'prop-types'
 
 // Material UI imports
-import {
-  Box,
-  Typography,
-  Chip,
-  IconButton,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-} from '@mui/material'
+import { Chip, IconButton, TableCell, TableRow } from '@mui/material'
 
 const Note = ({ noteId }) => {
   const note = useSelector((state) => selectNoteById(state, noteId))
@@ -56,6 +47,10 @@ const Note = ({ noteId }) => {
       </TableRow>
     )
   } else return null
+}
+
+Note.propTypes = {
+  noteId: PropTypes.string.isRequired,
 }
 
 export default Note

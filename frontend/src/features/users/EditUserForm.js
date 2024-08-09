@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { ROLES } from '../../config/roles'
+import PropTypes from 'prop-types'
 
 const USER_REGEX = /^[A-z]{3,20}$/
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
@@ -60,13 +61,9 @@ const EditUserForm = ({ user }) => {
     setRoles(values)
   }
 
-  // Add OnActive Changed
-
   const onActiveChanged = () => setActive((prev) => !prev)
 
-  // Add onSaveUserClicked
-
-  const onSaveUserClicked = async (e) => {
+  const onSaveUserClicked = async () => {
     // we don't require pwd
     if (password) {
       await updateUser({ id: user.id, username, password, roles, active })
@@ -74,7 +71,7 @@ const EditUserForm = ({ user }) => {
       await updateUser({ id: user.id, username, roles, active })
     }
   }
-  // add onDeleteUserClicked
+
   const onDeleteUserClicked = async () => {
     await deleteUser({ id: user.id })
   }
@@ -88,37 +85,29 @@ const EditUserForm = ({ user }) => {
     )
   })
 
-  // check if we can save
-  // All of these methods should be true
-  // if not loading -> can save is true
-
-  let canSave
-
-  if (password) {
-    canSave =
-      [roles.length, validUsername, validPassword].every(Boolean) && !isLoading
-  } else {
-    canSave = [roles.length, validUsername].every(Boolean) && !isLoading
+  const canSave = () => {
+    if (password) {
+      return (
+        [roles.length, validUsername, validPassword].every(Boolean) &&
+        !isLoading
+      )
+    } else {
+      return [roles.length, validUsername].every(Boolean) && !isLoading
+    }
   }
 
-  const errClass = isError || isDelError ? 'errmsg' : 'offscreen'
-  const validUserClass = !validUsername ? 'form__input--incomplete' : ''
-  const validPwdClass =
+  const getErrClass = () => (isError || isDelError ? 'errmsg' : 'offscreen')
+  const validUserClass = () => (!validUsername ? 'form__input--incomplete' : '')
+  const validPwdClass = () =>
     password && !validPassword ? 'form__input--incomplete' : ''
-  const validRolesClass = !Boolean(roles.length)
-    ? 'form__input--incomplete'
-    : ''
+  const validRolesClass = () => (!roles.length ? 'form__input--incomplete' : '')
 
-  // check for update / del error
-  const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
-
-  // has save & delete buttons -> they call mutations
-  // add active/not buttons
-  // other fields are same
+  const getErrContent = () =>
+    (error?.data?.message || delerror?.data?.message) ?? ''
 
   const content = (
     <>
-      <p className={errClass}>{errContent}</p>
+      <p className={getErrClass()}>{getErrContent()}</p>
 
       <form className='form' onSubmit={(e) => e.preventDefault()}>
         <div className='form__title-row'>
@@ -128,7 +117,7 @@ const EditUserForm = ({ user }) => {
               className='icon-button'
               title='Save'
               onClick={onSaveUserClicked}
-              disabled={!canSave}
+              disabled={!canSave()}
             >
               <FontAwesomeIcon icon={faSave} />
             </button>
@@ -188,7 +177,7 @@ const EditUserForm = ({ user }) => {
         <select
           id='roles'
           name='roles'
-          className={`form__select ${validRolesClass}`}
+          className={`form__select ${validRolesClass()}`}
           multiple={true}
           size='3'
           value={roles}
@@ -202,4 +191,14 @@ const EditUserForm = ({ user }) => {
 
   return content
 }
+
+EditUserForm.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    roles: PropTypes.arrayOf(PropTypes.string).isRequired,
+    active: PropTypes.bool.isRequired,
+  }).isRequired,
+}
+
 export default EditUserForm

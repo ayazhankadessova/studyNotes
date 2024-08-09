@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@mui/material'
 import SaveIcon from '@mui/icons-material/Save'
+import PropTypes from 'prop-types'
 
 const NewNoteForm = ({ users }) => {
   const [addNewNote, { isLoading, isSuccess, isError, error }] =
@@ -119,6 +120,15 @@ const NewNoteForm = ({ users }) => {
       </Box>
     </Box>
   )
+}
+
+NewNoteForm.propTypes = {
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 }
 
 export default NewNoteForm
